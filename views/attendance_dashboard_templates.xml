@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Main Dashboard Template -->
+    <template id="main_dashboard" name="Attendance Dashboard">
+        <t t-call="website.layout">
+            <t t-set="title">AGB Communication - Attendance Dashboard</t>
+            <div class="agb-container">
+                <!-- Header -->
+                <div class="agb-header">
+                    <div class="agb-logo">
+                        <img src="/attendance_dashboard/static/src/img/logo.png" alt="AGB Communication Logo" class="agb-logo-img"/>
+                    </div>
+                    <h1 class="agb-company-name"><t t-esc="company_info['name']"/></h1>
+                    <p class="agb-company-subtitle"><t t-esc="company_info['country']"/> • Employee Attendance Portal</p>
+                    <div class="agb-contact-info">
+                        <span>📞 <t t-esc="company_info['phone']"/></span>
+                        <span>📧 <t t-esc="company_info['email']"/></span>
+                    </div>
+                    <div class="agb-logout-section">
+                        <a href="/attendance/logout" class="agb-logout-btn">Logout</a>
+                    </div>
+                </div>
+
+                <!-- Main Content -->
+                <div class="agb-main-content">
+                    <div class="agb-dashboard-content">
+                        <!-- Welcome Section -->
+                        <div class="agb-welcome-section">
+                            <div class="agb-welcome-header">
+                                <div class="agb-welcome-icon">
+                                    👤
+                                </div>
+                                <div class="agb-welcome-text">
+                                    <h2>Welcome back, <t t-esc="employee.name"/>!</h2>
+                                    <p>Employee ID: <t t-esc="employee.employee_number"/> • <t t-esc="employee.department_id.name or 'No Department'"/></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Stats Cards -->
+                        <div class="agb-stats-grid">
+                            <!-- Attendance Card -->
+                            <div class="agb-stat-card agb-stat-attendance" onclick="window.location.href='/attendance/calendar'">
+                                <div class="agb-stat-icon">✓</div>
+                                <div class="agb-stat-content">
+                                    <h3>Attendance</h3>
+                                    <div class="agb-stat-number"><t t-esc="stats['attendanceCount']"/></div>
+                                    <p>Days present this month</p>
+                                </div>
+                                <div class="agb-stat-arrow">→</div>
+                            </div>
+
+                            <!-- Absent Card -->
+                            <div class="agb-stat-card agb-stat-absent" onclick="window.location.href='/attendance/absent'">
+                                <div class="agb-stat-icon">✗</div>
+                                <div class="agb-stat-content">
+                                    <h3>Absent</h3>
+                                    <div class="agb-stat-number"><t t-esc="stats['absentCount']"/></div>
+                                    <p>Days absent this month</p>
+                                </div>
+                                <div class="agb-stat-arrow">→</div>
+                            </div>
+
+                            <!-- Late Card -->
+                            <div class="agb-stat-card agb-stat-late" onclick="window.location.href='/attendance/late'">
+                                <div class="agb-stat-icon">⚠</div>
+                                <div class="agb-stat-content">
+                                    <h3>Late</h3>
+                                    <div class="agb-stat-number"><t t-esc="stats['lateCount']"/></div>
+                                    <p>Late arrivals this month</p>
+                                </div>
+                                <div class="agb-stat-arrow">→</div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Info -->
+                        <div class="agb-quick-info">
+                            <h3>Quick Information</h3>
+                            <div class="agb-info-grid">
+                                <div class="agb-info-item">
+                                    📅 <span>Current Month: <t t-esc="current_month"/></span>
+                                </div>
+                                <div class="agb-info-item">
+                                    🕒 <span>Working Schedule: <t t-esc="employee.resource_calendar_id.name or 'Standard Schedule'"/></span>
+                                </div>
+                                <div class="agb-info-item">
+                                    🏢 <span>Department: <t t-esc="employee.department_id.name or 'No Department'"/></span>
+                                </div>
+                                <div class="agb-info-item">
+                                    👨‍💼 <span>Job Position: <t t-esc="employee.job_id.name or 'No Position'"/></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div class="agb-footer">
+                    <p>© 2024 AGB Communication Myanmar. All rights reserved.</p>
+                    <p>Secure Employee Portal • Attendance System v1.0</p>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!-- Calendar Template -->
+    <template id="attendance_calendar" name="Attendance Calendar">
+        <t t-call="website.layout">
+            <t t-set="title">Attendance Calendar</t>
+            <div class="agb-container">
+                <div class="agb-calendar-container">
+                    <div class="agb-calendar-header">
+                        <button class="agb-back-btn" onclick="window.location.href='/attendance/dashboard'">
+                            ← Back to Dashboard
+                        </button>
+                        <h2>Attendance Calendar</h2>
+                        <a href="/attendance/logout" class="agb-logout-btn">Logout</a>
+                    </div>
+
+                    <div class="agb-calendar-navigation">
+                        <button t-attf-onclick="window.location.href='/attendance/calendar?year=#{prev_month['year']}&amp;month=#{prev_month['month']}'">
+                            ←
+                        </button>
+
+                        <h3><t t-esc="month_name"/> <t t-esc="year"/></h3>
+                        <button t-attf-onclick="window.location.href='/attendance/calendar?year=#{next_month['year']}&amp;month=#{next_month['month']}'">
+                            →
+                        </button>
+                    </div>
+
+                    <div class="agb-calendar-legend">
+                        <div class="agb-legend-item">
+                            <div class="agb-legend-dots">
+                                <div class="agb-dot agb-dot-green"></div>
+                                <div class="agb-dot agb-dot-green"></div>
+                            </div>
+                            <span>Full Attendance</span>
+                        </div>
+                        <div class="agb-legend-item">
+                            <div class="agb-legend-dots">
+                                <div class="agb-dot agb-dot-green"></div>
+                                <div class="agb-dot agb-dot-red"></div>
+                            </div>
+                            <span>Check In/Out Missing</span>
+                        </div>
+                        <div class="agb-legend-item">
+                            <div class="agb-legend-dots">
+                                <div class="agb-dot agb-dot-red"></div>
+                                <div class="agb-dot agb-dot-red"></div>
+                            </div>
+                            <span>Full Day Absent</span>
+                        </div>
+                    </div>
+
+                    <div class="agb-calendar-grid">
+                        <div class="agb-calendar-header-row">
+                            <div class="agb-calendar-header-cell">Sun</div>
+                            <div class="agb-calendar-header-cell">Mon</div>
+                            <div class="agb-calendar-header-cell">Tue</div>
+                            <div class="agb-calendar-header-cell">Wed</div>
+                            <div class="agb-calendar-header-cell">Thu</div>
+                            <div class="agb-calendar-header-cell">Fri</div>
+                            <div class="agb-calendar-header-cell">Sat</div>
+                        </div>
+                        <div class="agb-calendar-body">
+                            <t t-set="first_day" t-value="calendar_data[1]['date'].weekday() + 1"/>
+                            <t t-if="first_day == 7" t-set="first_day" t-value="0"/>
+                            
+                            <!-- Empty cells for days before first day -->
+                            <t t-foreach="range(first_day)" t-as="empty_day">
+                                <div class="agb-calendar-day agb-calendar-day-empty"></div>
+                            </t>
+                            
+                            <!-- Calendar days -->
+                            <t t-foreach="calendar_data.items()" t-as="day_data">
+                                <t t-set="day" t-value="day_data[0]"/>
+                                <t t-set="data" t-value="day_data[1]"/>
+                                <div t-attf-class="agb-calendar-day #{data['is_weekend'] and 'agb-calendar-weekend' or ''}">
+                                    <span class="agb-day-number"><t t-esc="day"/></span>
+                                    <t t-if="not data['is_weekend']">
+                                        <div class="agb-attendance-dots">
+                                            <div t-attf-class="agb-dot #{data['has_check_in'] and 'agb-dot-green' or 'agb-dot-red'}"></div>
+                                            <div t-attf-class="agb-dot #{data['has_check_out'] and 'agb-dot-green' or 'agb-dot-red'}"></div>
+                                        </div>
+                                    </t>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!-- Absent Details Template -->
+    <template id="absent_details" name="Absent Details">
+        <t t-call="website.layout">
+            <t t-set="title">Absent Details</t>
+            <div class="agb-container">
+                <div class="agb-details-container">
+                    <div class="agb-details-header">
+                        <button class="agb-back-btn" onclick="window.location.href='/attendance/dashboard'">
+                            ← Back to Dashboard
+                        </button>
+                        <h2>Absent Details</h2>
+                        <p>All absent days for <t t-esc="current_month"/></p>
+                        <a href="/attendance/logout" class="agb-logout-btn">Logout</a>
+                    </div>
+
+                    <div class="agb-details-stats">
+                        <div class="agb-stat-summary">
+                            <div class="agb-stat-item">
+                                <span class="agb-stat-label">Total Absent Days</span>
+                                <span class="agb-stat-value"><t t-esc="total_absent"/></span>
+                            </div>
+                            <div class="agb-stat-item">
+                                <span class="agb-stat-label">This Month</span>
+                                <span class="agb-stat-value"><t t-esc="current_month"/></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="agb-details-list">
+                        <t t-foreach="absent_days" t-as="record">
+                            <div class="agb-detail-card agb-absent-card">
+                                <div class="agb-detail-date">
+                                    📅
+                                    <div>
+                                        <h3><t t-esc="record['formatted_date']"/></h3>
+                                        <p><t t-esc="record['iso_date']"/></p>
+                                    </div>
+                                </div>
+                                
+                                <div class="agb-detail-times">
+                                    <div class="agb-time-item">
+                                        🕒 <span class="agb-time-label">Check In:</span>
+                                        <span class="agb-time-value agb-absent-dot">●</span>
+                                    </div>
+                                    <div class="agb-time-item">
+                                        🕒 <span class="agb-time-label">Check Out:</span>
+                                        <span class="agb-time-value agb-absent-dot">●</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="agb-detail-status agb-status-absent">
+                                    ABSENT
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+
+                    <t t-if="not absent_days">
+                        <div class="agb-no-data">
+                            📅
+                            <h3>No Absent Days</h3>
+                            <p>You have perfect attendance this month!</p>
+                        </div>
+                    </t>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!-- Late Details Template -->
+    <template id="late_details" name="Late Details">
+        <t t-call="website.layout">
+            <t t-set="title">Late Details</t>
+            <div class="agb-container">
+                <div class="agb-details-container">
+                    <div class="agb-details-header">
+                        <button class="agb-back-btn" onclick="window.location.href='/attendance/dashboard'">
+                            ← Back to Dashboard
+                        </button>
+                        <h2>Late Arrival Details</h2>
+                        <p>All late arrivals for <t t-esc="current_month"/></p>
+                        <a href="/attendance/logout" class="agb-logout-btn">Logout</a>
+                    </div>
+
+                    <div class="agb-details-stats">
+                        <div class="agb-stat-summary">
+                            <div class="agb-stat-item">
+                                <span class="agb-stat-label">Total Late Days</span>
+                                <span class="agb-stat-value"><t t-esc="total_late_days"/></span>
+                            </div>
+                            <div class="agb-stat-item">
+                                <span class="agb-stat-label">Total Late Minutes</span>
+                                <span class="agb-stat-value"><t t-esc="total_late_minutes"/></span>
+                            </div>
+                            <div class="agb-stat-item">
+                                <span class="agb-stat-label">Average Lateness</span>
+                                <span class="agb-stat-value"><t t-esc="avg_lateness"/> min</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="agb-details-list">
+                        <t t-foreach="late_days" t-as="record">
+                            <div class="agb-detail-card agb-late-card">
+                                <div class="agb-detail-date">
+                                    📅
+                                    <div>
+                                        <h3><t t-esc="record['formatted_date']"/></h3>
+                                        <p><t t-esc="record['iso_date']"/></p>
+                                    </div>
+                                </div>
+                                
+                                <div class="agb-detail-times">
+                                    <div class="agb-time-item">
+                                        🕒 <span class="agb-time-label">Check In:</span>
+                                        <span class="agb-time-value"><t t-esc="record['check_in_time']"/></span>
+                                    </div>
+                                    <div class="agb-late-indicator">
+                                        ⚠ <span class="agb-late-minutes"><t t-esc="record['late_minutes']"/> min late</span>
+                                    </div>
+                                </div>
+                                
+                                <div t-attf-class="agb-detail-status agb-status-late agb-severity-#{record['severity']}">
+                                    LATE
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+
+                    <t t-if="not late_days">
+                        <div class="agb-no-data">
+                            🕒
+                            <h3>No Late Arrivals</h3>
+                            <p>You have perfect punctuality this month!</p>
+                        </div>
+                    </t>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!-- Access Denied Template -->
+    <template id="access_denied" name="Access Denied">
+        <t t-call="website.layout">
+            <t t-set="title">Access Denied</t>
+            <div class="agb-container">
+                <div class="agb-error">
+                    ⚠
+                    <h3>Access Denied</h3>
+                    <p>Please log in to access the attendance dashboard.</p>
+                    <a href="/employee/register" class="agb-login-btn">Go to Login</a>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

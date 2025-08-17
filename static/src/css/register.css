@@ -1,0 +1,722 @@
+/* AGB Communication Myanmar Employee Portal Styles */
+
+/* Main Container */
+.agb-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #e3f2fd 0%, #ffffff 50%, #e8f5e8 100%);
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Company Header */
+.agb-header {
+  text-align: center;
+  margin-bottom: 30px;
+  animation: fadeInDown 0.8s ease-out;
+}
+
+.agb-logo {
+  width: 80px;
+  height: 80px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  border: 3px solid #1976d2;
+  overflow: hidden;
+}
+
+.agb-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 8px;
+}
+
+.agb-company-name {
+  font-size: 32px;
+  font-weight: 700;
+  color: #1565c0;
+  margin: 0 0 8px 0;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.agb-company-subtitle {
+  font-size: 16px;
+  color: #666;
+  margin: 0 0 15px 0;
+  font-weight: 500;
+}
+
+.agb-contact-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 11px;
+  color: #777;
+  text-align: center;
+}
+
+.agb-contact-info span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Form Card */
+.agb-form-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 100%;
+  max-width: 1000px;
+  animation: fadeInUp 0.8s ease-out;
+  border: 1px solid #e0e0e0;
+  margin: 30px;
+}
+
+.agb-form-header {
+  background: linear-gradient(135deg, #1976d2, #388e3c);
+  color: white;
+  padding: 30px 25px;
+  text-align: center;
+}
+
+.agb-form-header i {
+  font-size: 24px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.agb-form-header h2 {
+  margin: 0 0 8px 0;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.agb-form-header p {
+  margin: 0;
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+/* Form Content */
+.agb-form {
+  padding: 0;
+}
+
+.agb-form-content {
+  padding: 30px 25px;
+}
+
+.agb-form-group {
+  margin-bottom: 25px;
+}
+
+.agb-label {
+  display: block;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.agb-label i {
+  margin-right: 8px;
+  color: #1976d2;
+  width: 16px;
+}
+
+.agb-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  background: #fafafa;
+  box-sizing: border-box;
+}
+
+.agb-input:focus {
+  outline: none;
+  border-color: #1976d2;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.1);
+}
+
+.agb-help-text {
+  display: block;
+  font-size: 12px;
+  color: #666;
+  margin-top: 5px;
+  font-style: italic;
+}
+
+/* Buttons */
+.agb-btn {
+  width: 100%;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+}
+
+.agb-btn-primary {
+  background: linear-gradient(135deg, #1976d2, #1565c0);
+  color: white;
+  box-shadow: 0 4px 15px rgba(25, 118, 210, 0.3);
+}
+
+.agb-btn-primary:hover {
+  background: linear-gradient(135deg, #1565c0, #0d47a1);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(25, 118, 210, 0.4);
+}
+
+.agb-btn-success {
+  background: linear-gradient(135deg, #388e3c, #2e7d32);
+  color: white;
+  box-shadow: 0 4px 15px rgba(56, 142, 60, 0.3);
+}
+
+.agb-btn-success:hover {
+  background: linear-gradient(135deg, #2e7d32, #1b5e20);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(56, 142, 60, 0.4);
+}
+
+.agb-btn-link {
+  color: blue;
+  background: none;
+  border: none;
+  padding-left: 10px;
+}
+
+/* Alerts */
+.agb-alert {
+  padding: 15px 20px;
+  margin: 20px 25px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+  animation: slideInDown 0.5s ease-out;
+}
+
+.agb-alert-danger {
+  background: linear-gradient(135deg, #ffebee, #ffcdd2);
+  color: #c62828;
+  border-left: 4px solid #d32f2f;
+}
+
+.agb-alert-success {
+  background: linear-gradient(135deg, #e8f5e8, #c8e6c9);
+  color: #2e7d32;
+  border-left: 4px solid #388e3c;
+}
+
+/* Forgot Password Section */
+.agb-forgot-header {
+  text-align: center;
+  margin-bottom: 25px;
+  padding: 20px;
+  background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+  border-radius: 8px;
+  border-left: 4px solid #ff9800;
+}
+
+.agb-forgot-header i {
+  font-size: 24px;
+  color: #f57c00;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.agb-forgot-header h3 {
+  margin: 0 0 8px 0;
+  color: #e65100;
+  font-size: 18px;
+}
+
+.agb-forgot-header p {
+  margin: 0;
+  color: #bf360c;
+  font-size: 14px;
+}
+
+.agb-forgot-link {
+  text-align: center;
+  padding: 20px 25px;
+  border-top: 1px solid #e0e0e0;
+  background: #fafafa;
+}
+
+.agb-link-btn {
+  background: none;
+  border: none;
+  color: #1976d2;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 5px 10px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.agb-link-btn:hover {
+  background: rgba(25, 118, 210, 0.1);
+  text-decoration: none;
+}
+
+/* Support Information */
+.agb-support-info {
+  background: linear-gradient(135deg, #f3e5f5, #e1bee7);
+  padding: 20px 25px;
+  border-top: 1px solid #e0e0e0;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.agb-support-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  color: #6a1b9a;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.agb-support-details {
+  font-size: 12px;
+  color: #4a148c;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.agb-support-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Footer */
+.agb-footer {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 12px;
+  color: #666;
+  animation: fadeIn 1s ease-out;
+}
+
+.agb-footer p {
+  margin: 5px 0;
+}
+
+/* Animations */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* RESPONSIVE DESIGN */
+
+/* Tablet breakpoint (768px and below) */
+@media (max-width: 768px) {
+  .agb-container {
+    padding: 15px;
+  }
+
+  .agb-form-card {
+    max-width: 100%;
+    margin: 20px 0;
+  }
+
+  .agb-company-name {
+    font-size: 28px;
+  }
+
+  .agb-logo {
+    width: 70px;
+    height: 70px;
+  }
+
+  .agb-contact-info {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .agb-form-content {
+    padding: 25px 20px;
+  }
+
+  .agb-form-header {
+    padding: 25px 20px;
+  }
+
+  .agb-form-header h2 {
+    font-size: 22px;
+  }
+
+  .agb-support-info {
+    padding: 15px 20px;
+  }
+
+  .agb-support-details {
+    font-size: 11px;
+  }
+
+  .agb-alert {
+    margin: 15px 20px;
+  }
+}
+
+/* Mobile breakpoint (480px and below) */
+@media (max-width: 480px) {
+  .agb-container {
+    padding: 10px;
+  }
+
+  .agb-form-card {
+    margin: 10px 0;
+    border-radius: 12px;
+  }
+
+  .agb-logo {
+    width: 60px;
+    height: 60px;
+  }
+
+  .agb-company-name {
+    font-size: 24px;
+    line-height: 1.2;
+  }
+
+  .agb-company-subtitle {
+    font-size: 14px;
+  }
+
+  .agb-form-header {
+    padding: 20px 15px;
+  }
+
+  .agb-form-header h2 {
+    font-size: 20px;
+  }
+
+  .agb-form-header p {
+    font-size: 12px;
+  }
+
+  .agb-form-content {
+    padding: 20px 15px;
+  }
+
+  .agb-input {
+    padding: 10px 14px;
+    font-size: 14px;
+  }
+
+  .agb-btn {
+    font-size: 14px;
+    padding: 12px 16px;
+  }
+
+  .agb-label {
+    font-size: 13px;
+  }
+
+  .agb-help-text {
+    font-size: 11px;
+  }
+
+  .agb-alert {
+    margin: 15px;
+    padding: 12px 15px;
+    font-size: 13px;
+  }
+
+  .agb-support-info {
+    padding: 15px;
+  }
+
+  .agb-support-header {
+    font-size: 13px;
+  }
+
+  .agb-support-details {
+    font-size: 10px;
+  }
+
+  .agb-footer {
+    font-size: 10px;
+    margin-top: 20px;
+  }
+
+  .agb-contact-info {
+    font-size: 11px;
+  }
+
+  .agb-forgot-header {
+    padding: 15px;
+  }
+
+  .agb-forgot-header h3 {
+    font-size: 16px;
+  }
+
+  .agb-forgot-header p {
+    font-size: 12px;
+  }
+
+  .agb-forgot-link {
+    padding: 15px;
+  }
+}
+
+/* Small mobile breakpoint (360px and below) */
+@media (max-width: 360px) {
+  .agb-container {
+    padding: 8px;
+  }
+
+  .agb-form-card {
+    margin: 5px 0;
+    border-radius: 8px;
+  }
+
+  .agb-company-name {
+    font-size: 20px;
+  }
+
+  .agb-logo {
+    width: 50px;
+    height: 50px;
+  }
+
+  .agb-form-header {
+    padding: 15px 10px;
+  }
+
+  .agb-form-content {
+    padding: 15px 10px;
+  }
+
+  .agb-input {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  .agb-btn {
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+
+  .agb-support-info {
+    padding: 10px;
+  }
+
+  .agb-alert {
+    margin: 10px;
+    padding: 10px 12px;
+  }
+}
+
+/* Landscape orientation adjustments */
+@media (max-height: 600px) and (orientation: landscape) {
+  .agb-container {
+    padding: 10px;
+    justify-content: flex-start;
+  }
+
+  .agb-form-card {
+    margin: 10px 0;
+  }
+
+  .agb-header {
+    margin-bottom: 15px;
+  }
+
+  .agb-logo {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+  }
+
+  .agb-company-name {
+    font-size: 20px;
+    margin-bottom: 5px;
+  }
+
+  .agb-company-subtitle {
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
+
+  .agb-form-header {
+    padding: 15px 20px;
+  }
+
+  .agb-form-content {
+    padding: 15px 20px;
+  }
+
+  .agb-support-info {
+    padding: 10px 20px;
+  }
+
+  .agb-footer {
+    margin-top: 15px;
+  }
+}
+
+/* Touch targets for mobile devices */
+@media (hover: none) {
+  .agb-btn {
+    min-height: 44px;
+  }
+
+  .agb-input {
+    min-height: 44px;
+  }
+
+  .agb-link-btn {
+    min-height: 44px;
+    padding: 10px 15px;
+  }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .agb-logo-img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .agb-container {
+    background: white !important;
+  }
+
+  .agb-form-card {
+    box-shadow: none !important;
+    border: 1px solid #ccc !important;
+  }
+
+  .agb-btn {
+    background: #ccc !important;
+    color: #000 !important;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .agb-container {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  }
+
+  .agb-form-card {
+    background: #2d3748;
+    border-color: #4a5568;
+  }
+
+  .agb-company-name {
+    color: #90cdf4;
+  }
+
+  .agb-company-subtitle {
+    color: #a0aec0;
+  }
+
+  .agb-contact-info {
+    color: #a0aec0;
+  }
+
+  .agb-input {
+    background: #4a5568;
+    border-color: #718096;
+    color: #e2e8f0;
+  }
+
+  .agb-input:focus {
+    background: #2d3748;
+    border-color: #4299e1;
+  }
+
+  .agb-label {
+    color: #e2e8f0;
+  }
+
+  .agb-help-text {
+    color: #a0aec0;
+  }
+
+  .agb-footer {
+    color: #a0aec0;
+  }
+}

@@ -1,0 +1,156 @@
+<odoo>
+  <template id="register_template" name="Employee Register/Login">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>    
+    <link rel="stylesheet" type="text/css" href="/attendance_dashboard/static/src/css/register.css"/>
+    <script type="text/javascript" src="/attendance_dashboard/static/src/js/register.js"/>
+  </head>
+    <body>
+      <div class="agb-container">
+        <!-- Company Header -->
+        <div class="agb-header">
+          <div class="agb-logo">
+            <img src="/custom_leave_request/static/src/img/logo.png" alt="AGB Communication Logo" class="agb-logo-img"/>
+          </div>
+          <h1 class="agb-company-name">AGB Communication</h1>
+          <p class="agb-company-subtitle">Myanmar • Employee Portal</p>
+          <div class="agb-contact-info">
+            <span><i class="fa fa-phone"></i> +959-765492075</span>
+            <span><i class="fa fa-envelope"></i> hr@agbcommunication.com</span>
+          </div>
+        </div>
+
+        <!-- Main Form Card -->
+        <div class="agb-form-card">
+          <div class="agb-form-header">
+            <i class="fa fa-user-plus"></i>
+            <h2>Employee Register </h2>
+            <p>Welcome to AGB Communication Myanmar Employee Portal</p>
+          </div>
+
+          <!-- Success/Error Messages -->
+          <t t-if="error">
+            <div class="agb-alert agb-alert-danger">
+              <i class="fa fa-exclamation-circle"></i>
+              <t t-esc="error"/>
+            </div>
+          </t>
+          <t t-if="success">
+            <div class="agb-alert agb-alert-success">
+              <i class="fa fa-check-circle"></i>
+              <t t-esc="success"/>
+            </div>
+          </t>
+
+          <!-- Registration/Login Form -->
+          <form action="/employee/register" method="post" class="agb-form">
+            <div t-if="not forgot" class="agb-form-content">
+              <div class="agb-form-group">
+                <label class="agb-label">
+                  <i class="fa fa-id-card"></i>
+                  Employee ID
+                </label>
+                <input type="text" 
+                       name="employee_number" 
+                       class="agb-input" 
+                       placeholder="Enter your AGB Employee ID (e.g., *****)"
+                       required="required" 
+                       t-att-value="employee_number or ''"/>
+                <small class="agb-help-text">Use your official AGB Communication Employee ID</small>
+              </div>
+
+              <div class="agb-form-group">
+                <label class="agb-label">
+                  <i class="fa fa-lock"></i>
+                  Password
+                </label>
+                <input type="password" 
+                       name="password" 
+                       class="agb-input" 
+                       placeholder="Enter your password"
+                       required="required"/>
+                <small class="agb-help-text">Enter your secure password</small>
+              </div>
+
+              <button type="submit" class="agb-btn agb-btn-primary">
+                <i class="fa fa-sign-in"></i>
+                Submit
+              </button>
+              <button type="button" class="agb-btn agb-btn-link" onclick="triggerForgotPassword()" style="color: blue; background: none; border: none; padding-left: 10px;">
+                <i class="fa fa-question-circle"></i> Forgot Password?
+              </button>
+               
+            </div>
+
+            <!-- Forgot Password Form -->
+            <div t-if="forgot" class="agb-form-content">
+              <div class="agb-forgot-header">
+                <i class="fa fa-key"></i>
+                <h3>Reset Your Password</h3>
+                <p>Enter your new password for Employee ID: <strong t-esc="employee_number"/></p>
+              </div>
+
+              <input type="hidden" name="employee_number" t-att-value="employee_number"/>
+              <input type="hidden" name="forgot" value="1"/>
+              
+              <div class="agb-form-group">
+                <label class="agb-label">
+                  <i class="fa fa-lock"></i>
+                  New Password
+                </label>
+                <input type="password" 
+                       name="new_password" 
+                       class="agb-input" 
+                       placeholder="Enter your new secure password"
+                       required="required"/>
+                <small class="agb-help-text">Choose a strong password with at least 8 characters</small>
+              </div>
+
+              <button type="submit" class="agb-btn agb-btn-success">
+                <i class="fa fa-refresh"></i>
+                Update Password
+              </button>
+            </div>
+          </form>
+
+          <!-- Forgot Password Link -->
+          <t t-if="error == 'Wrong password.'">
+            <div class="agb-forgot-link">
+              <form action="/employee/register" method="post" style="display:inline;">
+                <input type="hidden" name="employee_number" t-att-value="employee_number"/>
+                <input type="hidden" name="forgot" value="1"/>
+                <button type="submit" class="agb-link-btn">
+                  <!-- <i class="fa fa-question-circle"></i>
+                  Forgot Password? -->
+                </button>
+              </form>
+            </div>
+          </t>
+
+          <!-- Support Information -->
+          <div class="agb-support-info">
+            <div class="agb-support-header">
+              <i class="fa fa-life-ring"></i>
+              <span>Need Help?</span>
+            </div>
+            <div class="agb-support-details">
+              <div class="agb-support-row">
+                <p><strong>IT Support:</strong> +95-1-234-5678 (Ext: 101)</p>
+                <p><strong>Email:</strong> it-support@agb.com.mm</p>
+                <p><strong>HR Department:</strong> hr@agb.com.mm</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="agb-footer">
+          <p>© 2024 AGB Communication Myanmar. All rights reserved.</p>
+          <p>Secure Employee Portal • Version 2.0</p>
+        </div>
+      </div>
+    </body> 
+  </template>
+</odoo>
+
