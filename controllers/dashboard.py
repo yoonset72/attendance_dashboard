@@ -228,8 +228,8 @@ class AttendanceDashboardController(http.Controller):
 
         # Start date = Aug 15 or start of month (whichever later)
         start_of_month = self._now_myanmar().replace(day=1, hour=0, minute=0, second=0, microsecond=0)
-        august_15 = self._now_myanmar().replace(month=8, day=15, hour=0, minute=0, second=0, microsecond=0)
-        start_date = max(start_of_month.date(), august_15.date())
+        august_18 = self._now_myanmar().replace(month=8, day=18, hour=0, minute=0, second=0, microsecond=0)
+        start_date = max(start_of_month.date(), august_18.date())
 
         # End date = today
         end_date = today
