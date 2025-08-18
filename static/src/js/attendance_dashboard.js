@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function initializeDashboard() {
     // Add smooth scroll behavior
     document.documentElement.style.scrollBehavior = 'smooth';
-    
+
     // Add loading states to buttons
     const buttons = document.querySelectorAll('.agb-back-btn, .agb-nav-btn');
     buttons.forEach(button => {
@@ -27,28 +27,25 @@ function initializeDashboard() {
             this.style.transform = 'scale(0.95)';
         });
     });
-    
-    // Add loading state to stat cards
+
+    // Add click and hover effects to stat cards
     const statCards = document.querySelectorAll('.agb-stat-card');
     statCards.forEach(card => {
+        // Click effect
         card.addEventListener('click', function() {
             this.style.opacity = '0.8';
             this.style.transform = 'translateY(-3px) scale(0.98)';
         });
-    });
-    
-    // Add hover effects to stat cards
-    const statCards = document.querySelectorAll('.agb-stat-card');
-    statCards.forEach(card => {
+
+        // Hover effects
         card.addEventListener('mouseenter', function() {
             this.style.transform = 'translateY(-5px) scale(1.02)';
         });
-        
         card.addEventListener('mouseleave', function() {
             this.style.transform = 'translateY(0) scale(1)';
         });
     });
-    
+
     // Add click animation to calendar days
     const calendarDays = document.querySelectorAll('.agb-calendar-day');
     calendarDays.forEach(day => {
@@ -61,13 +58,13 @@ function initializeDashboard() {
             }
         });
     });
-    
+
     // Add fade-in animation to details cards
     const detailCards = document.querySelectorAll('.agb-detail-card');
     detailCards.forEach((card, index) => {
         card.style.animationDelay = `${index * 0.1}s`;
     });
-    
+
     // Add responsive table functionality for mobile
     handleMobileResponsiveness();
 }
@@ -76,16 +73,12 @@ function handleMobileResponsiveness() {
     const handleResize = () => {
         const isMobile = window.innerWidth <= 768;
         const statsGrid = document.querySelector('.agb-stats-grid');
-        
         if (statsGrid) {
-            if (isMobile) {
-                statsGrid.style.gridTemplateColumns = '1fr';
-            } else {
-                statsGrid.style.gridTemplateColumns = 'repeat(auto-fit, minmax(280px, 1fr))';
-            }
+            statsGrid.style.gridTemplateColumns = isMobile
+                ? '1fr'
+                : 'repeat(auto-fit, minmax(280px, 1fr))';
         }
     };
-    
     window.addEventListener('resize', handleResize);
     handleResize(); // Call once on load
 }

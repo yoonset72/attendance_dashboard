@@ -1,4 +1,4 @@
-/* AGB Communication Attendance Dashboard Styles */
+/* AGB Communication Attendance Dashboard Styles - Consistent with Register Page */
 
 /* Reset and Base Styles */
 * {
@@ -7,175 +7,304 @@
   padding: 0;
 }
 
-.agb-container {
+html {
+  scroll-behavior: smooth;
+}
+
+body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  line-height: 1.6;
+  color: #333; /* Consistent with register.css base text color */
+  overflow-x: hidden;
+}
+
+/* Main Container - Adapted from register.css */
+.agb-container {
   min-height: 100vh;
-  padding: 20px;
-  color: #333;
+  background: linear-gradient(135deg, #e3f2fd 0%, #ffffff 50%, #e8f5e8 100%); /* Lighter gradient from register.css */
+  padding: 20px; /* Consistent padding */
+  position: relative;
+  display: flex; /* Added for centering content if needed, similar to register */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Centering for smaller content, adjust as needed for dashboard */
 }
 
-/* Header Styles */
+.agb-container::before {
+  /* Removed the fixed background overlay as it's not in register.css */
+  content: none;
+}
+
+/* Header Styles - Adapted from register.css */
 .agb-header {
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 20px;
-  padding: 30px;
+  background: white; /* Solid white background from register.css */
+  backdrop-filter: none; /* Removed blur */
+  border-radius: 16px; /* Consistent border-radius */
+  padding: 30px 25px; /* Consistent padding */
+  margin-bottom: 30px; /* Consistent margin */
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1); /* Stronger shadow from register.css */
+  border: 1px solid #e0e0e0; /* Consistent border */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  margin-bottom: 30px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+  animation: fadeInDown 0.8s ease-out; /* Added animation from register.css */
+  width: 100%; /* Ensure it takes full width up to max-width */
+  max-width: 1000px;
 }
 
+.agb-header::before {
+  /* Removed the top gradient line as it's not in register.css */
+  content: none;
+}
+
+/* Logo Styles - Adapted from register.css */
 .agb-logo {
-  margin-bottom: 15px;
+  width: 80px; /* Consistent width */
+  height: 80px; /* Consistent height */
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px; /* Consistent margin */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); /* Consistent shadow */
+  border: 3px solid #1976d2; /* Consistent border color */
+  overflow: hidden;
+  margin-bottom: 20px; /* Adjusted margin-bottom to match register.css */
 }
 
 .agb-logo-img {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 4px solid #667eea;
+  width: 100%; /* Consistent width */
+  height: 100%; /* Consistent height */
+  object-fit: contain; /* Changed to contain for logo consistency */
+  padding: 8px; /* Added padding from register.css */
+  border-radius: 50%; /* Keep border-radius for circular image */
+  transition: transform 0.3s ease;
 }
 
+.agb-logo-img:hover {
+  transform: scale(1.1);
+}
+
+/* Company Name and Subtitle - Adapted from register.css */
 .agb-company-name {
-  font-size: 2.5rem;
+  font-size: 32px; /* Consistent font size */
   font-weight: 700;
-  color: #2c3e50;
-  margin-bottom: 5px;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: #1565c0; /* Consistent color */
+  margin: 0 0 8px 0; /* Consistent margin */
+  text-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Consistent text shadow */
+  background: none; /* Removed gradient text fill */
+  -webkit-background-clip: unset;
+  -webkit-text-fill-color: unset;
+  background-clip: unset;
 }
 
 .agb-company-subtitle {
-  font-size: 1.1rem;
-  color: #7f8c8d;
-  margin-bottom: 15px;
+  font-size: 16px; /* Consistent font size */
+  color: #666; /* Consistent color */
+  margin: 0 0 15px 0; /* Consistent margin */
   font-weight: 500;
 }
 
+/* Contact Info - Adapted from register.css */
 .agb-contact-info {
   display: flex;
   justify-content: center;
-  gap: 30px;
-  flex-wrap: wrap;
+  align-items: center; /* Added align-items */
+  flex-direction: column; /* Changed to column for consistency */
+  gap: 8px; /* Consistent gap */
+  font-size: 11px; /* Consistent font size */
+  color: #777; /* Consistent color */
+  text-align: center;
+  margin-bottom: 15px; /* Adjusted margin-bottom */
 }
 
 .agb-contact-info span {
-  font-size: 0.9rem;
-  color: #667eea;
-  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 5px; /* Consistent gap */
+  font-size: 11px; /* Ensure consistency */
+  color: #777; /* Ensure consistency */
+  font-weight: 500; /* Adjusted font-weight */
+  padding: 0; /* Removed padding */
+  background: none; /* Removed background */
+  border-radius: 0; /* Removed border-radius */
+  transition: none; /* Removed transition */
+}
+
+.agb-contact-info span:hover {
+  background: none;
+  transform: none;
 }
 
 /* Logout Section */
 .agb-logout-section {
-  margin-top: 20px;
+  margin-top: 1rem;
 }
 
-.agb-logout-btn {
-  background: #e74c3c;
-  color: white;
-  text-decoration: none;
-  padding: 10px 20px;
-  border-radius: 8px;
+/* Buttons - Adapted from register.css */
+.agb-btn {
+  width: 100%; /* Full width for consistency with register buttons */
+  padding: 14px 20px; /* Consistent padding */
+  border: none;
+  border-radius: 8px; /* Consistent border-radius */
+  font-size: 16px; /* Consistent font size */
   font-weight: 600;
+  cursor: pointer;
   transition: all 0.3s ease;
-  display: inline-block;
-  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px; /* Consistent gap */
+  text-transform: uppercase; /* Consistent text transform */
+  letter-spacing: 0.5px; /* Consistent letter spacing */
+  text-decoration: none;
 }
 
-.agb-logout-btn:hover {
-  background: #c0392b;
-  transform: translateY(-2px);
-  text-decoration: none;
-  color: white;
-}
-
-.agb-login-btn {
-  background: #667eea;
-  color: white;
-  text-decoration: none;
-  padding: 12px 24px;
-  border-radius: 10px;
+.agb-btn-link { /* Used for logout button in dashboard template */
+  background: none; /* Changed to no background for link style */
+  color: #1976d2; /* Consistent link color */
+  border: none;
+  padding-left: 10px; /* Consistent padding */
+  text-decoration: none; /* Consistent underline */
+  font-size: 14px; /* Consistent font size */
   font-weight: 600;
-  transition: all 0.3s ease;
-  display: inline-block;
-  margin-top: 20px;
-  font-size: 1rem;
+  text-transform: none; /* Removed uppercase */
+  letter-spacing: normal; /* Removed letter spacing */
+  width: auto; /* Allow width to be content-based */
 }
 
-.agb-login-btn:hover {
-  background: #5a67d8;
-  transform: translateY(-2px);
-  text-decoration: none;
+.agb-btn-link:hover {
+  background: rgba(25, 118, 210, 0.1); /* Consistent hover background */
+  transform: none; /* Removed transform */
+  color: #1976d2; /* Keep color consistent on hover */
+  box-shadow: none; /* Removed box-shadow */
+  text-decoration: none; /* Removed underline on hover */
+}
+
+.agb-btn-primary {
+  background: linear-gradient(135deg, #1976d2, #1565c0); /* Consistent gradient */
   color: white;
+  box-shadow: 0 4px 15px rgba(25, 118, 210, 0.3); /* Consistent shadow */
 }
 
-/* Main Content */
+.agb-btn-primary:hover {
+  background: linear-gradient(135deg, #1565c0, #0d47a1); /* Consistent hover gradient */
+  transform: translateY(-2px);
+  color: white;
+  box-shadow: 0 6px 20px rgba(25, 118, 210, 0.4); /* Consistent hover shadow */
+}
+
+/* Main Content - Adapted from register.css form card */
 .agb-main-content {
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 20px;
-  padding: 40px;
-  margin-bottom: 30px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(10px);
+  background: white; /* Consistent white background */
+  backdrop-filter: none; /* Removed blur */
+  border-radius: 16px; /* Consistent border-radius */
+  padding: 30px 25px; /* Consistent padding */
+  margin-bottom: 30px; /* Consistent margin */
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1); /* Consistent shadow */
+  border: 1px solid #e0e0e0; /* Consistent border */
+  width: 100%; /* Ensure it takes full width up to max-width */
+  max-width: 1000px; /* Consistent max-width */
+  animation: fadeInUp 0.8s ease-out; /* Added animation */
+}
+
+/* Form Card (used for quick info and calendar grid) - Adapted from register.css form card */
+.agb-form-card {
+  background: white; /* Consistent white background */
+  backdrop-filter: none; /* Removed blur */
+  border-radius: 16px; /* Consistent border-radius */
+  padding: 30px 25px; /* Consistent padding */
+  margin-bottom: 30px; /* Consistent margin */
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1); /* Consistent shadow */
+  border: 1px solid #e0e0e0; /* Consistent border */
+  transition: all 0.3s ease;
+}
+
+.agb-form-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15); /* Slightly adjusted hover shadow */
 }
 
 /* Welcome Section */
 .agb-welcome-section {
-  margin-bottom: 40px;
+  margin-bottom: 2rem;
 }
 
 .agb-welcome-header {
   display: flex;
   align-items: center;
-  gap: 20px;
-  padding: 25px;
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  border-radius: 15px;
+  gap: 1.5rem;
+  padding: 30px 25px; /* Consistent padding */
+  background: linear-gradient(135deg, #1976d2, #388e3c); /* Consistent gradient from register form header */
+  border-radius: 16px;
   color: white;
-  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 10px 30px rgba(25, 118, 210, 0.3); /* Adjusted shadow color */
+  position: relative;
+  overflow: hidden;
+}
+
+.agb-welcome-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
+  pointer-events: none;
 }
 
 .agb-welcome-icon {
-  font-size: 2rem;
+  font-size: 24px; /* Consistent with register form header icon */
   background: rgba(255, 255, 255, 0.2);
-  padding: 15px;
+  padding: 1rem;
   border-radius: 50%;
   backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
 }
 
 .agb-welcome-text h2 {
-  font-size: 1.8rem;
+  font-size: 24px; /* Consistent with register form header h2 */
   font-weight: 600;
-  margin-bottom: 5px;
+  margin-bottom: 8px; /* Consistent margin */
 }
 
 .agb-welcome-text p {
   opacity: 0.9;
-  font-size: 1rem;
+  font-size: 14px; /* Consistent with register form header p */
 }
 
 /* Stats Grid */
 .agb-stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 25px;
-  margin-bottom: 40px;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .agb-stat-card {
-  background: white;
-  border-radius: 15px;
-  padding: 30px;
+  background: white; /* Consistent white background */
+  backdrop-filter: none; /* Removed blur */
+  border-radius: 16px; /* Consistent border-radius */
+  padding: 2rem;
   display: flex;
   align-items: center;
-  gap: 20px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  gap: 1.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
   cursor: pointer;
-  border: 2px solid transparent;
+  border: 1px solid #e0e0e0; /* Consistent border */
   position: relative;
   overflow: hidden;
+  animation: fadeInUp 0.5s ease-out; /* Added animation */
 }
 
 .agb-stat-card::before {
@@ -185,42 +314,42 @@
   left: 0;
   width: 100%;
   height: 4px;
-  background: linear-gradient(90deg, #667eea, #764ba2);
+  background: var(--accent-color, linear-gradient(90deg, #1976d2, #388e3c)); /* Adjusted default accent color */
   transition: height 0.3s ease;
 }
 
 .agb-stat-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
 }
 
 .agb-stat-card:hover::before {
-  height: 100%;
-  opacity: 0.1;
+  height: 8px;
+}
+
+.agb-stat-attendance {
+  --accent-color: #388e3c; /* Green from register success */
+}
+
+.agb-stat-absent {
+  --accent-color: #d32f2f; /* Red from register danger */
+}
+
+.agb-stat-late {
+  --accent-color: #ff9800; /* Orange from register forgot header */
 }
 
 .agb-stat-icon {
-  font-size: 2.5rem;
-  width: 70px;
-  height: 70px;
+  font-size: 2rem;
+  width: 80px;
+  height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 15px;
+  border-radius: 16px;
   color: white;
-  font-weight: bold;
-}
-
-.agb-stat-attendance .agb-stat-icon {
-  background: linear-gradient(135deg, #27ae60, #2ecc71);
-}
-
-.agb-stat-absent .agb-stat-icon {
-  background: linear-gradient(135deg, #e74c3c, #c0392b);
-}
-
-.agb-stat-late .agb-stat-icon {
-  background: linear-gradient(135deg, #f39c12, #e67e22);
+  background: var(--accent-color);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 .agb-stat-content {
@@ -228,144 +357,124 @@
 }
 
 .agb-stat-content h3 {
-  font-size: 1.1rem;
-  color: #7f8c8d;
-  margin-bottom: 8px;
+  font-size: 1.2rem;
+  color: #374151;
+  margin-bottom: 0.5rem;
   font-weight: 600;
 }
 
 .agb-stat-number {
-  font-size: 2.5rem;
+  font-size: 3rem;
   font-weight: 700;
-  color: #2c3e50;
-  margin-bottom: 5px;
+  color: var(--accent-color);
+  margin-bottom: 0.25rem;
 }
 
 .agb-stat-content p {
-  color: #95a5a6;
+  color: #6b7280;
   font-size: 0.9rem;
 }
 
 .agb-stat-arrow {
-  font-size: 1.5rem;
-  color: #bdc3c7;
+  font-size: 1.2rem;
+  color: #9ca3af;
   transition: all 0.3s ease;
 }
 
 .agb-stat-card:hover .agb-stat-arrow {
-  color: #667eea;
-  transform: translateX(5px);
+  color: var(--accent-color);
+  transform: translateX(4px);
 }
 
-/* Quick Info */
+/* Quick Info - Adapted from register.css alert styles */
 .agb-quick-info {
-  background: #f8f9fa;
-  border-radius: 15px;
-  padding: 25px;
-  border-left: 5px solid #667eea;
+  background: linear-gradient(135deg, #e3f2fd, #c8e6c9); /* Blend of light blue and green from register alerts */
+  border-radius: 16px;
+  padding: 2rem;
+  border-left: 4px solid #1976d2; /* Primary color border */
+  margin-bottom: 30px; /* Consistent margin */
+}
+
+.agb-form-header { /* Re-used for quick info header */
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  color: #1976d2; /* Primary color */
 }
 
 .agb-quick-info h3 {
-  font-size: 1.3rem;
-  color: #2c3e50;
-  margin-bottom: 20px;
+  font-size: 1.4rem;
+  color: #1565c0; /* Darker primary color */
   font-weight: 600;
 }
 
 .agb-info-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 15px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
 }
 
 .agb-info-item {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 15px;
+  gap: 0.75rem;
+  padding: 1rem;
   background: white;
-  border-radius: 10px;
+  border-radius: 12px;
   font-weight: 500;
-  color: #34495e;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  color: #374151;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  border: 1px solid #e0e0e0; /* Added border for consistency */
+}
+
+.agb-info-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.agb-info-item i {
+  color: #1976d2; /* Primary color */
+  font-size: 1.1rem;
 }
 
 /* Calendar Styles */
 .agb-calendar-container {
-  max-width: 1000px;
+  max-width: 1000px; /* Consistent max-width */
   margin: 0 auto;
+  padding: 20px; /* Added padding for consistency */
 }
 
 .agb-calendar-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 30px;
+  margin-bottom: 30px; /* Consistent margin */
   flex-wrap: wrap;
-  gap: 15px;
+  gap: 1rem;
   position: relative;
 }
 
-.agb-calendar-header .agb-logout-btn {
-  font-size: 0.8rem;
-  padding: 8px 16px;
-}
-
-.agb-back-btn {
-  background: #667eea;
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.agb-back-btn:hover {
-  background: #5a67d8;
-  transform: translateY(-2px);
-}
-
 .agb-calendar-header h2 {
-  color: #2c3e50;
-  font-size: 1.8rem;
+  color: #1f2937;
+  font-size: 2rem;
+  font-weight: 600;
 }
 
 .agb-calendar-navigation {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 30px;
-  margin-bottom: 30px;
-}
-
-.agb-nav-btn {
-  background: #667eea;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.agb-nav-btn:hover {
-  background: #5a67d8;
-  transform: scale(1.1);
+  gap: 2rem;
+  margin-bottom: 2rem;
 }
 
 .agb-calendar-navigation h3 {
-  font-size: 1.5rem;
-  color: #2c3e50;
+  font-size: 1.8rem;
+  color: #1f2937;
   font-weight: 600;
-  min-width: 200px;
+  min-width: 250px;
   text-align: center;
 }
 
@@ -373,261 +482,357 @@
 .agb-calendar-legend {
   display: flex;
   justify-content: center;
-  gap: 30px;
-  margin-bottom: 30px;
+  gap: 2rem;
+  margin-bottom: 2rem;
   flex-wrap: wrap;
+  padding: 1rem;
+  background: linear-gradient(135deg, #e3f2fd, #c8e6c9); /* Consistent with quick info */
+  border-radius: 12px;
+  border-left: 4px solid #1976d2; /* Consistent with quick info */
 }
 
 .agb-legend-item {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 0.5rem;
   font-size: 0.9rem;
-  color: #34495e;
+  color: #374151;
   font-weight: 500;
 }
 
 .agb-legend-dots {
   display: flex;
-  gap: 3px;
+  gap: 2px;
 }
 
 .agb-dot {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
+  transition: all 0.3s ease;
 }
 
 .agb-dot-green {
-  background: #27ae60;
+  background: #388e3c; /* Consistent green */
 }
 
 .agb-dot-red {
-  background: #e74c3c;
+  background: #d32f2f; /* Consistent red */
 }
 
-/* Calendar Grid */
+/* Calendar Grid - Adapted from agb-form-card */
 .agb-calendar-grid {
   background: white;
-  border-radius: 15px;
-  padding: 25px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  backdrop-filter: none;
+  border-radius: 16px;
+  padding: 30px 25px; /* Consistent padding */
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1); /* Consistent shadow */
+  border: 1px solid #e0e0e0; /* Consistent border */
 }
 
 .agb-calendar-header-row {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 10px;
-  margin-bottom: 15px;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .agb-calendar-header-cell {
   text-align: center;
   font-weight: 600;
-  color: #7f8c8d;
-  padding: 10px;
+  color: #6b7280;
+  padding: 1rem;
   font-size: 0.9rem;
+  background: rgba(25, 118, 210, 0.05); /* Light primary color background */
+  border-radius: 8px;
 }
 
 .agb-calendar-body {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 10px;
+  gap: 0.5rem;
 }
 
 .agb-calendar-day {
-  aspect-ratio: 1;
-  border: 1px solid #ecf0f1;
-  border-radius: 10px;
+  min-height: 80px;
+  border: 1px solid rgba(25, 118, 210, 0.2); /* Border with primary color tint */
+  border-radius: 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   position: relative;
-  background: white;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(5px);
   transition: all 0.3s ease;
+  cursor: pointer;
+  animation: slideInRight 0.3s ease-out; /* Added animation */
 }
 
 .agb-calendar-day:hover {
-  background: #f8f9fa;
-  transform: scale(1.05);
+  background: rgba(25, 118, 210, 0.1); /* Hover with primary color tint */
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 .agb-calendar-day-empty {
   border: none;
   background: transparent;
+  cursor: default;
+}
+
+.agb-calendar-day-empty:hover {
+  transform: none;
+  box-shadow: none;
 }
 
 .agb-calendar-weekend {
-  background: #f8f9fa;
-  color: #95a5a6;
+  background: rgba(107, 114, 128, 0.1);
+  color: #6b7280;
 }
 
 .agb-day-number {
   font-weight: 600;
-  font-size: 1.1rem;
-  margin-bottom: 5px;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  color: #374151;
 }
 
 .agb-attendance-dots {
   display: flex;
-  gap: 3px;
+  gap: 4px;
+  position: absolute;
+  bottom: 0.5rem;
 }
 
 /* Details Styles */
 .agb-details-container {
-  max-width: 800px;
+  max-width: 1000px; /* Consistent max-width */
   margin: 0 auto;
+  padding: 20px; /* Added padding for consistency */
 }
 
 .agb-details-header {
-  text-align: center;
-  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 30px; /* Consistent margin */
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e0e0e0; /* Consistent border color */
   position: relative;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
-.agb-details-header .agb-logout-btn {
-  position: absolute;
-  top: 0;
-  right: 0;
-  font-size: 0.8rem;
-  padding: 8px 16px;
+.agb-details-header > div {
+  flex: 1;
+  min-width: 200px;
 }
 
 .agb-details-header h2 {
-  color: #2c3e50;
-  font-size: 1.8rem;
-  margin-bottom: 10px;
+  color: #1f2937;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
 }
 
 .agb-details-header p {
-  color: #7f8c8d;
-  font-size: 1.1rem;
+  color: #6b7280;
+  font-size: 1rem;
 }
 
 .agb-details-stats {
-  background: white;
-  border-radius: 15px;
-  padding: 25px;
-  margin-bottom: 30px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  background: white; /* Consistent white background */
+  backdrop-filter: none; /* Removed blur */
+  border-radius: 16px; /* Consistent border-radius */
+  padding: 30px 25px; /* Consistent padding */
+  margin-bottom: 30px; /* Consistent margin */
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1); /* Consistent shadow */
+  border: 1px solid #e0e0e0; /* Consistent border */
 }
 
 .agb-stat-summary {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #e3f2fd, #c8e6c9); /* Consistent with quick info */
+  border-radius: 12px;
+  border-left: 4px solid #1976d2; /* Consistent with quick info */
 }
 
 .agb-stat-item {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .agb-stat-label {
   display: block;
-  color: #7f8c8d;
-  font-size: 0.9rem;
-  margin-bottom: 8px;
+  color: #6b7280;
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
   font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .agb-stat-value {
-  font-size: 1.8rem;
+  font-size: 2rem;
   font-weight: 700;
-  color: #2c3e50;
+  color: #1976d2; /* Primary color */
 }
 
-/* Detail Cards */
+/* Detail Cards - Adapted from agb-form-card */
 .agb-details-list {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 1.5rem;
 }
 
 .agb-detail-card {
   background: white;
-  border-radius: 15px;
-  padding: 25px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-  display: grid;
-  grid-template-columns: 2fr 2fr 1fr;
-  gap: 20px;
+  backdrop-filter: none;
+  border-radius: 16px; /* Consistent border-radius */
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0; /* Consistent border */
+  display: flex;
   align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
   transition: all 0.3s ease;
+  flex-wrap: wrap;
+  animation: fadeInUp 0.5s ease-out; /* Added animation */
 }
 
 .agb-detail-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.15);
 }
 
 .agb-detail-date {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 1rem;
+  min-width: 250px;
+}
+
+.agb-detail-date i {
+  color: #1976d2; /* Primary color */
+  font-size: 1.2rem;
 }
 
 .agb-detail-date div h3 {
-  font-size: 1.1rem;
-  color: #2c3e50;
-  margin-bottom: 5px;
+  font-size: 1rem;
+  color: #1f2937;
+  margin-bottom: 0.25rem;
   font-weight: 600;
 }
 
 .agb-detail-date div p {
-  color: #7f8c8d;
-  font-size: 0.9rem;
+  color: #6b7280;
+  font-size: 0.8rem;
 }
 
 .agb-detail-times {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 0.5rem;
+  flex: 1;
 }
 
 .agb-time-item {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 0.5rem;
   font-size: 0.9rem;
 }
 
+.agb-time-item i {
+  color: #6b7280;
+  width: 16px;
+}
+
 .agb-time-label {
-  color: #7f8c8d;
+  color: #374151;
   font-weight: 500;
+  min-width: 80px;
 }
 
 .agb-time-value {
-  color: #2c3e50;
+  color: #1f2937;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.agb-time-display {
   font-weight: 600;
 }
 
-.agb-absent-dot {
-  color: #e74c3c;
-  font-size: 1.2rem;
+.agb-absent-text {
+  color: #d32f2f; /* Consistent red */
+  font-style: italic;
+}
+
+.agb-status-present {
+  color: #388e3c; /* Consistent green */
+}
+
+.agb-status-absent {
+  color: #d32f2f; /* Consistent red */
 }
 
 .agb-late-indicator {
   display: flex;
   align-items: center;
-  gap: 5px;
-  color: #f39c12;
+  gap: 0.5rem;
+  color: #ff9800; /* Consistent orange */
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+}
+
+.agb-late-minutes {
+  font-weight: 600;
 }
 
 .agb-detail-status {
   text-align: center;
-  padding: 8px 16px;
+  padding: 0.5rem 1rem;
   border-radius: 20px;
   font-weight: 700;
-  font-size: 0.8rem;
-  letter-spacing: 0.5px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  min-width: 120px;
 }
 
-.agb-status-absent {
-  background: #e74c3c;
+.agb-absent-btn {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: bold;
   color: white;
+  text-align: center;
+  min-width: 120px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.agb-absent-btn.agb-morning {
+  background-color: #ff9800; /* Consistent orange */
+}
+
+.agb-absent-btn.agb-evening {
+  background-color: #f57c00; /* Darker orange */
+}
+
+.agb-absent-btn.agb-full_day {
+  background-color: #d32f2f; /* Consistent red */
 }
 
 .agb-status-late {
@@ -635,155 +840,625 @@
 }
 
 .agb-severity-low {
-  background: #f39c12;
+  background: #388e3c; /* Consistent green */
 }
 
 .agb-severity-medium {
-  background: #e67e22;
+  background: #ff9800; /* Consistent orange */
 }
 
 .agb-severity-high {
-  background: #e74c3c;
+  background: #d32f2f; /* Consistent red */
 }
 
 /* No Data State */
 .agb-no-data {
   text-align: center;
-  padding: 60px 20px;
-  color: #7f8c8d;
+  padding: 4rem 2rem;
+  color: #6b7280;
+}
+
+.agb-no-data-icon {
+  color: #9ca3af;
+  margin-bottom: 1rem;
 }
 
 .agb-no-data h3 {
-  font-size: 1.5rem;
-  margin: 20px 0 10px;
-  color: #2c3e50;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 0.5rem;
 }
 
 .agb-no-data p {
-  font-size: 1.1rem;
+  font-size: 0.9rem;
 }
 
-/* Loading and Error States */
+/* Loading and Error States - Adapted from register.css alerts */
 .agb-loading,
 .agb-error {
   text-align: center;
-  padding: 60px 20px;
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  padding: 4rem 2rem;
+  background: linear-gradient(135deg, #ffebee, #ffcdd2); /* Consistent with danger alert */
+  border-radius: 16px; /* Consistent border-radius */
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1); /* Consistent shadow */
+  border: 1px solid #e0e0e0; /* Consistent border */
+  border-left: 4px solid #d32f2f; /* Consistent danger border */
+  animation: slideInDown 0.5s ease-out; /* Added animation */
 }
 
 .agb-loading h3,
 .agb-error h3 {
-  font-size: 1.5rem;
-  margin: 20px 0 10px;
-  color: #2c3e50;
+  font-size: 1.25rem;
+  margin: 1rem 0 0.5rem;
+  color: #c62828; /* Consistent danger color */
+  font-weight: 600;
 }
 
 .agb-loading p,
 .agb-error p {
-  color: #7f8c8d;
-  font-size: 1.1rem;
-}
-
-.agb-error {
-  color: #e74c3c;
-}
-
-/* Footer */
-.agb-footer {
-  text-align: center;
-  color: rgba(255, 255, 255, 0.8);
-  padding: 20px;
+  color: #d32f2f; /* Consistent danger color */
   font-size: 0.9rem;
 }
 
-.agb-footer p {
-  margin-bottom: 5px;
+.agb-error {
+  color: #d32f2f; /* Consistent danger color */
 }
 
-/* Responsive Design */
+/* Footer - Adapted from register.css */
+.agb-footer {
+  background: white; /* Consistent white background */
+  backdrop-filter: none; /* Removed blur */
+  border-radius: 16px; /* Consistent border-radius */
+  padding: 20px; /* Consistent padding */
+  text-align: center;
+  color: #666; /* Consistent color */
+  font-size: 12px; /* Consistent font size */
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1); /* Consistent shadow */
+  border: 1px solid #e0e0e0; /* Consistent border */
+  margin-top: 30px; /* Consistent margin */
+  animation: fadeIn 1s ease-out; /* Added animation */
+  width: 100%; /* Ensure it takes full width up to max-width */
+  max-width: 1000px;
+}
+
+.agb-footer p {
+  margin: 5px 0; /* Consistent margin */
+}
+
+/* Responsive Design - Harmonized breakpoints and styles */
+@media (max-width: 1200px) {
+  .agb-stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+  
+  .agb-calendar-container {
+    max-width: 100%;
+  }
+}
+
 @media (max-width: 768px) {
   .agb-container {
-    padding: 15px;
+    padding: 15px; /* Consistent padding */
+  }
+  
+  .agb-header {
+    padding: 25px 20px; /* Consistent padding */
+    border-radius: 16px; /* Consistent border-radius */
+    margin: 20px 0; /* Consistent margin */
+  }
+  
+  .agb-main-content,
+  .agb-form-card {
+    border-radius: 16px; /* Consistent border-radius */
+    padding: 25px 20px; /* Consistent padding */
+    margin: 20px 0; /* Consistent margin */
   }
   
   .agb-company-name {
-    font-size: 2rem;
+    font-size: 28px; /* Consistent font size */
   }
   
-  .agb-main-content {
-    padding: 25px;
+  .agb-company-subtitle {
+    font-size: 1rem;
+  }
+  
+  .agb-contact-info {
+    flex-direction: column;
+    gap: 8px; /* Consistent gap */
   }
   
   .agb-welcome-header {
     flex-direction: column;
     text-align: center;
+    gap: 1rem;
+    padding: 25px 20px; /* Consistent padding */
+  }
+  
+  .agb-welcome-text h2 {
+    font-size: 1.5rem;
   }
   
   .agb-stats-grid {
     grid-template-columns: 1fr;
+    gap: 1rem;
   }
   
-  .agb-contact-info {
-    flex-direction: column;
-    gap: 10px;
+  .agb-stat-card {
+    padding: 1.5rem;
+  }
+  
+  .agb-stat-number {
+    font-size: 2.5rem;
+  }
+  
+  .agb-info-grid {
+    grid-template-columns: 1fr;
   }
   
   .agb-calendar-navigation {
-    gap: 15px;
+    gap: 1rem;
   }
   
   .agb-calendar-navigation h3 {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     min-width: auto;
   }
   
-  .agb-details-header .agb-logout-btn,
-  .agb-calendar-header .agb-logout-btn {
-    position: static;
-    margin-top: 10px;
+  .agb-calendar-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
   
-  .agb-details-header,
-  .agb-calendar-header {
+  .agb-details-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .agb-calendar-legend {
+    gap: 1rem;
     flex-direction: column;
     align-items: center;
   }
   
-  .agb-calendar-legend {
-    gap: 15px;
+  .agb-calendar-grid {
+    padding: 1rem;
+  }
+  
+  .agb-calendar-day {
+    min-height: 60px;
   }
   
   .agb-detail-card {
-    grid-template-columns: 1fr;
-    text-align: center;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+  
+  .agb-detail-date {
+    min-width: auto;
+    justify-content: center;
   }
   
   .agb-stat-summary {
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .agb-alert { /* Consistent with register.css */
+    margin: 15px 20px;
   }
 }
 
 @media (max-width: 480px) {
+  .agb-container {
+    padding: 10px; /* Consistent padding */
+  }
+  
+  .agb-header,
+  .agb-main-content,
+  .agb-form-card {
+    padding: 1rem;
+    border-radius: 12px; /* Consistent border-radius */
+    margin: 10px 0; /* Consistent margin */
+  }
+  
+  .agb-company-name {
+    font-size: 24px; /* Consistent font size */
+    line-height: 1.2;
+  }
+  
+  .agb-logo-img {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .agb-welcome-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 2rem;
+  }
+  
+  .agb-welcome-text h2 {
+    font-size: 1.3rem;
+  }
+  
+  .agb-stat-card {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+  
+  .agb-stat-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+  }
+  
+  .agb-stat-number {
+    font-size: 2rem;
+  }
+  
+  .agb-calendar-header-cell {
+    padding: 0.5rem;
+    font-size: 0.8rem;
+  }
+  
   .agb-calendar-body {
-    gap: 5px;
+    gap: 0.25rem;
   }
   
   .agb-calendar-day {
-    border-radius: 5px;
+    min-height: 50px;
+    border-radius: 8px;
   }
   
   .agb-day-number {
-    font-size: 1rem;
+    font-size: 0.8rem;
   }
   
-  .agb-detail-card {
-    padding: 20px;
+  .agb-dot {
+    width: 6px;
+    height: 6px;
+  }
+
+  .agb-alert { /* Consistent with register.css */
+    margin: 15px;
+    padding: 12px 15px;
+    font-size: 13px;
+  }
+
+  .agb-footer { /* Consistent with register.css */
+    font-size: 10px;
+    margin-top: 20px;
   }
 }
 
-/* Animation Classes */
+@media (max-width: 360px) {
+  .agb-container {
+    padding: 8px; /* Consistent padding */
+  }
+
+  .agb-form-card {
+    margin: 5px 0; /* Consistent margin */
+    border-radius: 8px; /* Consistent border-radius */
+  }
+
+  .agb-company-name {
+    font-size: 20px; /* Consistent font size */
+  }
+
+  .agb-logo {
+    width: 50px;
+    height: 50px;
+  }
+
+  .agb-header,
+  .agb-main-content {
+    padding: 15px 10px; /* Consistent padding */
+  }
+
+  .agb-alert { /* Consistent with register.css */
+    margin: 10px;
+    padding: 10px 12px;
+  }
+}
+
+/* Landscape orientation adjustments - Harmonized */
+@media (max-height: 600px) and (orientation: landscape) {
+  .agb-container {
+    padding: 10px;
+    justify-content: flex-start;
+  }
+
+  .agb-form-card {
+    margin: 10px 0;
+  }
+
+  .agb-header {
+    margin-bottom: 15px;
+  }
+
+  .agb-logo {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+  }
+
+  .agb-company-name {
+    font-size: 20px;
+    margin-bottom: 5px;
+  }
+
+  .agb-company-subtitle {
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
+
+  .agb-welcome-header {
+    padding: 15px 20px;
+  }
+
+  .agb-main-content {
+    padding: 15px 20px;
+  }
+
+  .agb-footer {
+    margin-top: 15px;
+  }
+}
+
+/* Touch targets for mobile devices - Harmonized */
+@media (hover: none) {
+  .agb-btn {
+    min-height: 44px;
+  }
+
+  .agb-input { /* Assuming input might be present in dashboard forms */
+    min-height: 44px;
+  }
+
+  .agb-link-btn {
+    min-height: 44px;
+    padding: 10px 15px;
+  }
+}
+
+/* High DPI displays - Harmonized */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .agb-logo-img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* Print Styles - Harmonized */
+@media print {
+  .agb-container {
+    background: white !important;
+  }
+
+  .agb-form-card,
+  .agb-header,
+  .agb-main-content,
+  .agb-footer { /* Apply to all main containers */
+    box-shadow: none !important;
+    border: 1px solid #ccc !important;
+  }
+
+  .agb-btn {
+    background: #ccc !important;
+    color: #000 !important;
+  }
+}
+
+/* Dark mode support - Harmonized */
+@media (prefers-color-scheme: dark) {
+  .agb-container {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  }
+
+  .agb-header,
+  .agb-main-content,
+  .agb-form-card,
+  .agb-calendar-grid,
+  .agb-details-stats,
+  .agb-detail-card,
+  .agb-footer {
+    background: #2d3748;
+    border-color: #4a5568;
+  }
+
+  .agb-company-name {
+    color: #90cdf4;
+  }
+
+  .agb-company-subtitle {
+    color: #a0aec0;
+  }
+
+  .agb-contact-info {
+    color: #a0aec0;
+  }
+
+  .agb-contact-info span { /* Ensure consistency for spans */
+    color: #a0aec0;
+  }
+
+  .agb-welcome-header {
+    background: linear-gradient(135deg, #0f3460, #1a1a2e); /* Darker gradient for welcome */
+    box-shadow: 0 10px 30px rgba(15, 52, 96, 0.3);
+  }
+
+  .agb-welcome-icon {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .agb-stat-card {
+    background: #2d3748;
+    border-color: #4a5568;
+  }
+
+  .agb-stat-content h3 {
+    color: #e2e8f0;
+  }
+
+  .agb-stat-content p {
+    color: #a0aec0;
+  }
+
+  .agb-quick-info,
+  .agb-calendar-legend,
+  .agb-stat-summary {
+    background: linear-gradient(135deg, #16213e, #0f3460); /* Darker background for info sections */
+    border-left-color: #4299e1; /* Consistent primary color for border */
+  }
+
+  .agb-quick-info h3 {
+    color: #90cdf4;
+  }
+
+  .agb-info-item {
+    background: #4a5568;
+    color: #e2e8f0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    border-color: #718096;
+  }
+
+  .agb-info-item i {
+    color: #4299e1;
+  }
+
+  .agb-calendar-header h2,
+  .agb-calendar-navigation h3 {
+    color: #e2e8f0;
+  }
+
+  .agb-calendar-header-cell {
+    background: rgba(66, 153, 225, 0.1); /* Darker primary tint */
+    color: #a0aec0;
+  }
+
+  .agb-calendar-day {
+    background: #4a5568;
+    border-color: #718096;
+    color: #e2e8f0;
+  }
+
+  .agb-calendar-day:hover {
+    background: rgba(66, 153, 225, 0.2);
+  }
+
+  .agb-calendar-weekend {
+    background: rgba(113, 128, 150, 0.2);
+    color: #a0aec0;
+  }
+
+  .agb-day-number {
+    color: #e2e8f0;
+  }
+
+  .agb-details-header h2 {
+    color: #e2e8f0;
+  }
+
+  .agb-details-header p {
+    color: #a0aec0;
+  }
+
+  .agb-stat-label {
+    color: #a0aec0;
+  }
+
+  .agb-stat-value {
+    color: #4299e1;
+  }
+
+  .agb-detail-date div h3 {
+    color: #e2e8f0;
+  }
+
+  .agb-detail-date div p {
+    color: #a0aec0;
+  }
+
+  .agb-time-item i {
+    color: #a0aec0;
+  }
+
+  .agb-time-label {
+    color: #e2e8f0;
+  }
+
+  .agb-time-value {
+    color: #e2e8f0;
+  }
+
+  .agb-absent-text {
+    color: #fc8181; /* Lighter red for dark mode */
+  }
+
+  .agb-status-present {
+    color: #68d391; /* Lighter green for dark mode */
+  }
+
+  .agb-status-absent {
+    color: #fc8181; /* Lighter red for dark mode */
+  }
+
+  .agb-late-indicator {
+    color: #f6ad55; /* Lighter orange for dark mode */
+  }
+
+  .agb-no-data {
+    color: #a0aec0;
+  }
+
+  .agb-no-data h3 {
+    color: #e2e8f0;
+  }
+
+  .agb-no-data-icon {
+    color: #718096;
+  }
+
+  .agb-loading,
+  .agb-error {
+    background: linear-gradient(135deg, #4a148c, #2d0b40); /* Darker purple/red for errors */
+    border-color: #6a1b9a;
+    border-left-color: #9c27b0;
+  }
+
+  .agb-loading h3,
+  .agb-error h3 {
+    color: #e1bee7;
+  }
+
+  .agb-loading p,
+  .agb-error p {
+    color: #ce93d8;
+  }
+
+  .agb-footer {
+    color: #a0aec0;
+  }
+}
+
+/* Animation Classes - Consistent */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -795,10 +1470,55 @@
   }
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Apply animations to relevant elements */
 .agb-stat-card,
 .agb-detail-card,
-.agb-calendar-day {
+.agb-form-card {
   animation: fadeInUp 0.5s ease-out;
+}
+
+.agb-calendar-day {
+  animation: slideInRight 0.3s ease-out;
 }
 
 @keyframes spin {
@@ -812,4 +1532,21 @@
 
 .animate-spin {
   animation: spin 1s linear infinite;
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Smooth transitions for all interactive elements */
+* {
+  transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Focus states for accessibility */
+.agb-btn:focus,
+.agb-stat-card:focus,
+.agb-calendar-day:focus {
+  outline: 2px solid #1976d2; /* Consistent primary color for focus */
+  outline-offset: 2px;
 }

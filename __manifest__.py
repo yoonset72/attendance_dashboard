@@ -9,7 +9,6 @@
     'data': [
         'security/ir.model.access.csv',
         'views/attendance_dashboard_templates.xml',
-        'views/attendance_dashboard_assets.xml',
         'views/register_template.xml',
     ],
     'assets': {

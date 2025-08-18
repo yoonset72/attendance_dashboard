@@ -11,7 +11,7 @@
         <!-- Company Header -->
         <div class="agb-header">
           <div class="agb-logo">
-            <img src="/custom_leave_request/static/src/img/logo.png" alt="AGB Communication Logo" class="agb-logo-img"/>
+            <img src="/attendance_dashboard/static/src/img/logo.png" alt="AGB Communication Logo" class="agb-logo-img"/>
           </div>
           <h1 class="agb-company-name">AGB Communication</h1>
           <p class="agb-company-subtitle">Myanmar • Employee Portal</p>
