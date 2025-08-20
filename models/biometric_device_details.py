@@ -122,6 +122,53 @@ class BiometricDeviceDetails(models.Model):
         else:
             return 'day', slots
 
+    def _compute_night_window(self, employee, punch_dt, device_tz):
+        """Compute night-shift window using calendar days, not generic anchors.
+
+        - First day start: the latest slot start time of the FIRST day
+          (previous day if punch is morning, current day if punch is evening)
+        - Second day end: the earliest slot end time of the SECOND day
+          (current day if punch is morning, next day if punch is evening)
+        """
+        today = punch_dt.date()
+        slots_today = self._get_employee_working_hours(employee, today)
+        if not slots_today:
+            # fallback
+            first_start_time = datetime.time(16, 45)
+            second_end_time = datetime.time(8, 45)
+            # decide orientation by time
+            if punch_dt.time() <= second_end_time:
+                start_date = today - datetime.timedelta(days=1)
+                end_date = today
+            else:
+                start_date = today
+                end_date = today + datetime.timedelta(days=1)
+            return (
+                device_tz.localize(datetime.datetime.combine(start_date, first_start_time)),
+                device_tz.localize(datetime.datetime.combine(end_date, second_end_time)),
+            )
+
+        # derive day-specific times
+        first_start_today = max((self._float_hour_to_time(s.hour_from) for s in slots_today), default=datetime.time(16, 45))
+        second_end_today = min((self._float_hour_to_time(s.hour_to) for s in slots_today), default=datetime.time(8, 45))
+
+        if punch_dt.time() <= second_end_today:
+            # Morning side → first day is yesterday, second day is today
+            prev_date = today - datetime.timedelta(days=1)
+            slots_prev = self._get_employee_working_hours(employee, prev_date)
+            first_start_prev = max((self._float_hour_to_time(s.hour_from) for s in slots_prev), default=first_start_today)
+            start_dt = device_tz.localize(datetime.datetime.combine(prev_date, first_start_prev))
+            end_dt = device_tz.localize(datetime.datetime.combine(today, second_end_today))
+        else:
+            # Evening side → first day is today, second day is tomorrow
+            next_date = today + datetime.timedelta(days=1)
+            slots_next = self._get_employee_working_hours(employee, next_date)
+            second_end_next = min((self._float_hour_to_time(s.hour_to) for s in slots_next), default=second_end_today)
+            start_dt = device_tz.localize(datetime.datetime.combine(today, first_start_today))
+            end_dt = device_tz.localize(datetime.datetime.combine(next_date, second_end_next))
+
+        return start_dt, end_dt
+
     # --- Core download and processing ---
     def action_download_attendance(self):
         start_time = time.time()
@@ -234,19 +281,8 @@ class BiometricDeviceDetails(models.Model):
                                 }).id
 
                     else:
-                        # Night shift handling
-                        first_day_start = slots[0][0]
-                        second_day_end = slots[1][1] if len(slots) > 1 else slots[0][1]
-
-                        if punch.time() >= first_day_start:
-                            shift_start_dt = datetime.datetime.combine(punch.date(), first_day_start)
-                            shift_end_dt = datetime.datetime.combine(punch.date() + datetime.timedelta(days=1), second_day_end)
-                        else:
-                            shift_start_dt = datetime.datetime.combine(punch.date() - datetime.timedelta(days=1), first_day_start)
-                            shift_end_dt = datetime.datetime.combine(punch.date(), second_day_end)
-
-                        shift_start_dt = device_tz.localize(shift_start_dt)
-                        shift_end_dt = device_tz.localize(shift_end_dt)
+                        # Night shift handling: build window from day-specific calendar
+                        shift_start_dt, shift_end_dt = self._compute_night_window(emp, punch, device_tz)
 
                         checkin_window_start = shift_start_dt - datetime.timedelta(hours=2)
                         checkin_window_end = shift_start_dt + datetime.timedelta(hours=4)
