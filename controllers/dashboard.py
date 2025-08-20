@@ -16,6 +16,18 @@ class AttendanceDashboardController(http.Controller):
         """Return current datetime in Myanmar timezone"""
         return datetime.now(pytz.utc).astimezone(MYANMAR_TZ)
 
+    def _get_fiscal_period(self):
+        """Return start_date and end_date based on fiscal year starting July 26"""
+        today = self._now_myanmar()
+        july_26_current = today.replace(month=7, day=26, hour=0, minute=0, second=0, microsecond=0)
+
+        if today < july_26_current:
+            start_date = july_26_current.replace(year=today.year - 1)
+        else:
+            start_date = july_26_current.replace(year=today.year)
+
+        return start_date, today
+
     # --- Dashboard Route ---
     @http.route('/attendance/dashboard', type='http', auth='public', website=True)
     def attendance_dashboard(self, **kwargs):
@@ -23,22 +35,20 @@ class AttendanceDashboardController(http.Controller):
         if not employee:
             return request.redirect('/employee/register')
 
-        today = self._now_myanmar()
-        start_of_month = today.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
-        end_of_month = (start_of_month + timedelta(days=32)).replace(day=1) - timedelta(days=1)
+        start_date, end_date = self._get_fiscal_period()
 
         attendances = request.env['hr.attendance'].sudo().search([
             ('employee_id', '=', employee.id),
-            ('check_in', '>=', start_of_month),
-            ('check_in', '<=', end_of_month)
+            ('check_in', '>=', start_date),
+            ('check_in', '<=', end_date)
         ])
 
-        stats = self._calculate_stats(employee, attendances, start_of_month, end_of_month)
+        stats = self._calculate_stats(employee, attendances, start_date, end_date)
 
         return request.render('attendance_dashboard.main_dashboard', {
             'employee': employee,
             'stats': stats,
-            'current_month': today.strftime('%B %Y'),
+            'current_period': f"{start_date.strftime('%B %d, %Y')} - {end_date.strftime('%B %d, %Y')}",
             'company_info': {
                 'name': 'AGB Communication',
                 'country': 'Myanmar',
@@ -82,7 +92,7 @@ class AttendanceDashboardController(http.Controller):
             'employee': employee,
             'absent_days': absent_days,
             'total_absent': len(absent_days),
-            'current_month': self._now_myanmar().strftime('%B %Y')
+            'current_period': f"{self._get_fiscal_period()[0].strftime('%B %d, %Y')} - {self._now_myanmar().strftime('%B %d, %Y')}"
         })
 
     # --- Late Route ---
@@ -100,9 +110,8 @@ class AttendanceDashboardController(http.Controller):
             'total_late_days': len(late_days),
             'total_late_minutes': total_late_minutes,
             'avg_lateness': avg_lateness,
-            'current_month': self._now_myanmar().strftime('%B %Y')
+            'current_period': f"{self._get_fiscal_period()[0].strftime('%B %d, %Y')} - {self._now_myanmar().strftime('%B %d, %Y')}"
         })
-
 
     # --- Logout Route ---
     @http.route('/attendance/logout', type='http', auth='public', website=True)
@@ -121,20 +130,11 @@ class AttendanceDashboardController(http.Controller):
             return None
         return employee
 
-    def _calculate_stats(self, employee, attendances, start_of_month, end_of_month):
-        """
-        Keep 'present' and 'late' scoped to the dashboard's current-month window,
-        but compute 'absent' using the same logic as the detail page.
-        """
-        # Use same absent logic (Aug 15 → today, weekday-only, etc.)
+    def _calculate_stats(self, employee, attendances, start_date, end_date):
         absent_days = self._get_absent_days(employee)
-
         present_days = len(attendances)
-
-        # ✅ Use hr.attendance.display_late_minutes instead of manual _is_late
         late_count = sum(1 for a in attendances if getattr(a, 'display_late_minutes', 0) > 0)
-
-        total_days = (end_of_month.date() - start_of_month.date()).days + 1
+        total_days = (end_date.date() - start_date.date()).days + 1
 
         return {
             'attendanceCount': present_days,
@@ -143,21 +143,14 @@ class AttendanceDashboardController(http.Controller):
             'total_days': total_days,
         }
 
-
-    def _is_late(self, check_in):
-        if not check_in:
-            return False
-        check_in_local = check_in.astimezone(MYANMAR_TZ)
-        return check_in_local.hour > 9 or (check_in_local.hour == 9 and check_in_local.minute > 0)
-
     def _get_calendar_data(self, employee, year, month):
         calendar_data = {}
         _, num_days = calendar.monthrange(year, month)
-        
+
         for day in range(1, num_days + 1):
             current_date = date(year, month, day)
-            weekday = current_date.weekday()  # 0 = Monday, 6 = Sunday
-            
+            weekday = current_date.weekday()
+
             day_att = request.env['hr.attendance'].sudo().search([
                 ('employee_id', '=', employee.id),
                 ('check_in', '>=', datetime(year, month, day)),
@@ -173,8 +166,6 @@ class AttendanceDashboardController(http.Controller):
 
             if day_att and getattr(day_att, 'display_late_minutes', "00:00") != "00:00":
                 display_late = day_att.display_late_minutes
-
-                # Handle float or string
                 if isinstance(display_late, float):
                     hours = int(display_late)
                     minutes = int((display_late - hours) * 60)
@@ -184,10 +175,9 @@ class AttendanceDashboardController(http.Controller):
                         hours, minutes = int(hh), int(mm)
                     except Exception:
                         hours, minutes = 0, 0
-
                 late_minutes = hours * 60 + minutes
 
-                if late_minutes > 0:  # Only mark as late if minutes > 0
+                if late_minutes > 0:
                     is_late = True
                     if late_minutes <= 5:
                         severity = 'low'
@@ -212,7 +202,6 @@ class AttendanceDashboardController(http.Controller):
 
         return calendar_data
 
-
     def _get_prev_month(self, year, month):
         if month == 1:
             return {'year': year - 1, 'month': 12}
@@ -224,36 +213,26 @@ class AttendanceDashboardController(http.Controller):
         return {'year': year, 'month': month + 1}
 
     def _get_absent_days(self, employee):
-        today = self._now_myanmar().date()
+        start_date, end_date = self._get_fiscal_period()
+        today = end_date.date()
 
-        # Start date = Aug 15 or start of month (whichever later)
-        start_of_month = self._now_myanmar().replace(day=1, hour=0, minute=0, second=0, microsecond=0)
-        august_18 = self._now_myanmar().replace(month=8, day=18, hour=0, minute=0, second=0, microsecond=0)
-        start_date = max(start_of_month.date(), august_18.date())
-
-        # End date = today
-        end_date = today
-
-        # Get attendances for range
         attendances = request.env['hr.attendance'].sudo().search([
             ('employee_id', '=', employee.id),
-            ('check_in', '>=', datetime.combine(start_date, datetime.min.time())),
-            ('check_in', '<=', datetime.combine(end_date, datetime.max.time())),
+            ('check_in', '>=', start_date),
+            ('check_in', '<=', end_date),
         ])
 
-        # Get employee working hours (end time today)
         calendar_id = employee.resource_calendar_id
-        end_hour = 17  # fallback 5 PM if no calendar
+        end_hour = 17
         if calendar_id and calendar_id.attendance_ids:
             end_hour = max(a.hour_to for a in calendar_id.attendance_ids)
 
         absent_days = []
-        current_date = start_date
-        while current_date <= end_date:
+        current_date = start_date.date()
+        while current_date <= today:
             day_att = attendances.filtered(lambda a: a.check_in.date() == current_date)
 
             if not day_att:
-                # If no attendance, only mark absent on weekdays
                 if current_date.weekday() < 5:
                     absent_days.append({
                         'date': current_date,
@@ -267,8 +246,7 @@ class AttendanceDashboardController(http.Controller):
                 check_in = att.check_in.astimezone(MYANMAR_TZ) if att.check_in else None
                 check_out = att.check_out.astimezone(MYANMAR_TZ) if att.check_out else None
 
-                # --- HALF DAY CASES ---
-                if not check_in and check_out:  # Morning absent
+                if not check_in and check_out:
                     absent_days.append({
                         'date': current_date,
                         'formatted_date': current_date.strftime('%A, %B %d, %Y'),
@@ -277,7 +255,7 @@ class AttendanceDashboardController(http.Controller):
                         'absence_type': 'Morning Absent',
                         'check_out_time': check_out.strftime('%H:%M')
                     })
-                elif check_in and not check_out:  # Evening absent?
+                elif check_in and not check_out:
                     if current_date == today:
                         now_hour = self._now_myanmar().hour
                         if now_hour >= end_hour:
@@ -303,25 +281,13 @@ class AttendanceDashboardController(http.Controller):
 
         return absent_days
 
-
-    def _is_half_day(self, attendance):
-        """Return True if only check-in or check-out exists or worked less than 4 hours"""
-        check_in = attendance.check_in.astimezone(MYANMAR_TZ) if attendance.check_in else None
-        check_out = attendance.check_out.astimezone(MYANMAR_TZ) if attendance.check_out else None
-        if not check_in or not check_out:
-            return True
-        worked_minutes = (check_out - check_in).total_seconds() / 60
-        return worked_minutes < 240  # Less than 4 hours is half-day
-
     def _get_late_days(self, employee):
-        today = self._now_myanmar()
-        start_of_month = today.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
-        end_of_month = (start_of_month + timedelta(days=32)).replace(day=1) - timedelta(days=1)
+        start_date, end_date = self._get_fiscal_period()
 
         attendances = request.env['hr.attendance'].sudo().search([
             ('employee_id', '=', employee.id),
-            ('check_in', '>=', start_of_month),
-            ('check_in', '<=', end_of_month)
+            ('check_in', '>=', start_date),
+            ('check_in', '<=', end_date)
         ])
 
         late_days = []
@@ -331,9 +297,7 @@ class AttendanceDashboardController(http.Controller):
             display_late = getattr(att, "display_late_minutes", "00:00")
             if display_late != "00:00":
                 check_in_local = att.check_in.astimezone(MYANMAR_TZ) if att.check_in else None
-                
-                # Convert to hours and minutes
-                if isinstance(display_late, float):  # in case it's stored as a float
+                if isinstance(display_late, float):
                     hours = int(display_late)
                     minutes = int((display_late - hours) * 60)
                 else:
@@ -341,14 +305,10 @@ class AttendanceDashboardController(http.Controller):
                     hours, minutes = int(hh), int(mm)
 
                 late_minutes = hours * 60 + minutes
-
-                # Skip if late_minutes is 0
                 if late_minutes == 0:
                     continue
 
                 total_late_minutes += late_minutes
-
-                # Determine severity
                 if late_minutes <= 5:
                     severity = 'low'
                 elif late_minutes <= 15:
@@ -366,5 +326,4 @@ class AttendanceDashboardController(http.Controller):
                 })
 
         avg_lateness = total_late_minutes / len(late_days) if late_days else 0
-
         return late_days, total_late_minutes, avg_lateness
