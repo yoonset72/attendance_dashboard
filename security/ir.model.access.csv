@@ -2,3 +2,5 @@ id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_attendance_dashboard_public,attendance_dashboard.public,base.model_res_users,,1,0,0,0
 access_hr_employee_public,hr.employee.public,hr.model_hr_employee,,1,0,0,0
 access_hr_attendance_public,hr.attendance.public,hr_attendance.model_hr_attendance,,1,0,0,0
+access_zk_machine_attendance_user,zk.machine.attendance.user,model_zk_machine_attendance,,1,1,1,0
+access_biometric_device_details_manager,biometric.device.details.manager,model_biometric_device_details,,1,1,1,0
