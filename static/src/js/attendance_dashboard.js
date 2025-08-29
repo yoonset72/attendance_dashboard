@@ -1,141 +1,198 @@
-// AGB Communication Attendance Dashboard JavaScript
+function showDayDetails(element) {
+    const modal = document.getElementById('day-details-modal');
+    const dateElement = document.getElementById('modal-date');
+    const shiftElement = document.getElementById('modal-shift');
+    const checkinElement = document.getElementById('modal-checkin');
+    const checkoutElement = document.getElementById('modal-checkout');
+    const lateElement = document.getElementById('modal-late');
+    const statusElement = document.getElementById('modal-status');
+    const attendanceElement = document.getElementById('modal-attendance');
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Initialize dashboard functionality
-    initializeDashboard();
+    const date = element.getAttribute('data-date');
+    const checkin = element.getAttribute('data-checkin');
+    const checkout = element.getAttribute('data-checkout');
+    const late = element.getAttribute('data-late');
+    const shift = element.getAttribute('data-shift');
+    let status = element.getAttribute('data-status');
+    const attendanceFraction = parseFloat(element.getAttribute('data-attendance-fraction') || '1');
+
+    // Handle partial attendance
+    if (attendanceFraction === 0.5) {
+        status = 'partial';
+    }
+
+    if (dateElement) dateElement.textContent = date;
+    if (shiftElement) shiftElement.textContent = shift;
+    if (checkinElement) checkinElement.textContent = checkin || 'Not recorded';
+    if (checkoutElement) checkoutElement.textContent = checkout || 'Not recorded';
+    if (lateElement) lateElement.textContent = late + ' minutes';
+    if (attendanceElement) attendanceElement.textContent = attendanceFraction.toFixed(1);
+
+    if (statusElement) {
+        statusElement.textContent = status.charAt(0).toUpperCase() + status.slice(1);
+        statusElement.className = 'agb-status-badge agb-status-' + status;
+    }
+
+    if (modal) modal.classList.add('show');
+}
+
+
+// Close modal function
+function closeDayDetails() {
+    const modal = document.getElementById('day-details-modal');
+    if (modal) {
+        modal.classList.remove('show');
+    }
+}
+
+
+// Close modal function
+function closeDayDetails() {
+    const modal = document.getElementById('day-details-modal');
+    if (modal) {
+        modal.classList.remove('show');
+    }
+}
+
+
+// Close modal function
+function closeDayDetails() {
+    const modal = document.getElementById('day-details-modal');
+    if (modal) modal.classList.remove('show');
+}
+
+
+// Close day details modal
+function closeDayDetails() {
+    const modal = document.getElementById('day-details-modal');
+    if (modal) {
+        modal.classList.remove('show');
+    }
+}
+
+function showLeaveNotification() {
+    showNotification('Leave management feature coming soon!', 'info');
+}
+
+// Generic notification function
+function showNotification(message, type = 'info') {
+    const container = document.getElementById('notification-container') || createNotificationContainer();
     
-    // Add logout confirmation
-    const logoutBtns = document.querySelectorAll('.agb-logout-btn');
-    logoutBtns.forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            if (!confirm('Are you sure you want to logout?')) {
-                e.preventDefault();
+    const notification = document.createElement('div');
+    notification.className = `agb-notification ${type}`;
+    notification.textContent = message;
+    
+    container.appendChild(notification);
+    
+    // Trigger animation
+    setTimeout(() => {
+        notification.classList.add('show');
+    }, 100);
+    
+    // Auto remove after 3 seconds
+    setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.parentNode.removeChild(notification);
             }
-        });
-    });
+        }, 300);
+    }, 3000);
+}
+
+// Create notification container if it doesn't exist
+function createNotificationContainer() {
+    const container = document.createElement('div');
+    container.id = 'notification-container';
+    container.className = 'agb-notification-container';
+    document.body.appendChild(container);
+    return container;
+}
+
+// Close modal when clicking outside
+document.addEventListener('click', function(event) {
+    const modal = document.getElementById('day-details-modal');
+    if (modal && event.target === modal) {
+        closeDayDetails();
+    }
 });
 
-function initializeDashboard() {
-    // Add smooth scroll behavior
-    document.documentElement.style.scrollBehavior = 'smooth';
-
-    // Add loading states to buttons
-    const buttons = document.querySelectorAll('.agb-back-btn, .agb-nav-btn');
-    buttons.forEach(button => {
-        button.addEventListener('click', function() {
-            this.style.opacity = '0.7';
-            this.style.transform = 'scale(0.95)';
-        });
-    });
-
-    // Add click and hover effects to stat cards
-    const statCards = document.querySelectorAll('.agb-stat-card');
-    statCards.forEach(card => {
-        // Click effect
-        card.addEventListener('click', function() {
-            this.style.opacity = '0.8';
-            this.style.transform = 'translateY(-3px) scale(0.98)';
-        });
-
-        // Hover effects
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-5px) scale(1.02)';
-        });
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0) scale(1)';
-        });
-    });
-
-    // Add click animation to calendar days
-    const calendarDays = document.querySelectorAll('.agb-calendar-day');
-    calendarDays.forEach(day => {
-        day.addEventListener('click', function() {
-            if (!this.classList.contains('agb-calendar-day-empty')) {
-                this.style.animation = 'pulse 0.3s ease-in-out';
-                setTimeout(() => {
-                    this.style.animation = '';
-                }, 300);
-            }
-        });
-    });
-
-    // Add fade-in animation to details cards
-    const detailCards = document.querySelectorAll('.agb-detail-card');
-    detailCards.forEach((card, index) => {
-        card.style.animationDelay = `${index * 0.1}s`;
-    });
-
-    // Add responsive table functionality for mobile
-    handleMobileResponsiveness();
-}
-
-function handleMobileResponsiveness() {
-    const handleResize = () => {
-        const isMobile = window.innerWidth <= 768;
-        const statsGrid = document.querySelector('.agb-stats-grid');
-        if (statsGrid) {
-            statsGrid.style.gridTemplateColumns = isMobile
-                ? '1fr'
-                : 'repeat(auto-fit, minmax(280px, 1fr))';
-        }
-    };
-    window.addEventListener('resize', handleResize);
-    handleResize(); // Call once on load
-}
-
-// Add CSS for pulse animation
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes pulse {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.05); }
-        100% { transform: scale(1); }
+// Close modal with Escape key
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        closeDayDetails();
     }
-`;
-document.head.appendChild(style);
+});
 
-// Utility functions for date handling
-function formatDate(dateString) {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', { 
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Add any initialization code here
+    console.log('AGB Attendance Dashboard loaded');
+    
+    // Add touch support for mobile devices
+    if ('ontouchstart' in window) {
+        document.body.classList.add('touch-device');
+    }
+});
+
+// Utility function to format dates
+function formatDate(date) {
+    const options = { 
         weekday: 'long', 
         year: 'numeric', 
         month: 'long', 
         day: 'numeric' 
-    });
+    };
+    return new Date(date).toLocaleDateString('en-US', options);
 }
 
-function formatTime(dateTimeString) {
-    const date = new Date(dateTimeString);
-    return date.toLocaleTimeString('en-US', {
-        hour: 'numeric',
-        minute: '2-digit',
-        hour12: true
-    });
+// Utility function to calculate working hours
+function calculateWorkingHours(checkin, checkout) {
+    if (!checkin || !checkout) return 0;
+    
+    const checkinTime = new Date('1970-01-01 ' + checkin);
+    const checkoutTime = new Date('1970-01-01 ' + checkout);
+    
+    const diffMs = checkoutTime - checkinTime;
+    const diffHours = diffMs / (1000 * 60 * 60);
+    
+    return Math.max(0, diffHours);
 }
 
-// Add smooth transitions for navigation
-function navigateWithTransition(url) {
-    document.body.style.opacity = '0.7';
-    setTimeout(() => {
-        window.location.href = url;
-    }, 200);
-}
-
-// Session management utilities
-function checkSession() {
-    // This would be handled server-side in Odoo
-    // Just for client-side feedback
-    const sessionActive = true; // Placeholder
-    if (!sessionActive) {
-        window.location.href = '/employee/register';
+(function() {
+    let startY = 0;
+    let currentY = 0;
+    let isPulling = false;
+    const threshold = 100; // Pixels to trigger refresh
+    const body = document.body;
+    function touchStartHandler(e) {
+        if (window.scrollY === 0) { // Only trigger if at top of page
+            startY = e.touches[0].clientY;
+            isPulling = true;
+        }
     }
-}
+    function touchMoveHandler(e) {
+        if (!isPulling) return;
+        currentY = e.touches[0].clientY;
+        if (currentY - startY > threshold) {
+            // User pulled down enough to trigger refresh
+            isPulling = false; // Prevent multiple triggers
+            showNotification('Refreshing data...', 'info');
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
+        }
+    }
+    function touchEndHandler() {
+        isPulling = false;
+    }
+    document.addEventListener('touchstart', touchStartHandler, {passive: true});
+    document.addEventListener('touchmove', touchMoveHandler, {passive: true});
+    document.addEventListener('touchend', touchEndHandler);
+})();
 
-// Export functions for global use
-window.AttendanceDashboard = {
-    formatDate,
-    formatTime,
-    navigateWithTransition,
-    checkSession
-};
+// Export functions for use in other scripts
+window.showDayDetails = showDayDetails;
+window.closeDayDetails = closeDayDetails;
+window.showLeaveNotification = showLeaveNotification;
+window.showNotification = showNotification;

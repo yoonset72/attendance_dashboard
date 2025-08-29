@@ -1,4 +1,4 @@
-/* AGB Communication Attendance Dashboard Styles - Consistent with Register Page */
+/* AGB Communication Attendance Dashboard Styles - Enhanced Responsive Design */
 
 /* Reset and Base Styles */
 * {
@@ -12,299 +12,195 @@ html {
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.6;
-  color: #333; /* Consistent with register.css base text color */
+  color: #333;
   overflow-x: hidden;
 }
 
-/* Main Container - Adapted from register.css */
-.agb-container {
+/* Main Container */
+.agb-app-container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #e3f2fd 0%, #ffffff 50%, #e8f5e8 100%); /* Lighter gradient from register.css */
-  padding: 20px; /* Consistent padding */
+  background: linear-gradient(135deg, #e3f2fd 0%, #ffffff 50%, #e8f5e8 100%);
   position: relative;
-  display: flex; /* Added for centering content if needed, similar to register */
-  flex-direction: column;
-  align-items: center;
-  justify-content: center; /* Centering for smaller content, adjust as needed for dashboard */
-}
-
-.agb-container::before {
-  /* Removed the fixed background overlay as it's not in register.css */
-  content: none;
-}
-
-/* Header Styles - Adapted from register.css */
-.agb-header {
-  background: white; /* Solid white background from register.css */
-  backdrop-filter: none; /* Removed blur */
-  border-radius: 16px; /* Consistent border-radius */
-  padding: 30px 25px; /* Consistent padding */
-  margin-bottom: 30px; /* Consistent margin */
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1); /* Stronger shadow from register.css */
-  border: 1px solid #e0e0e0; /* Consistent border */
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-  animation: fadeInDown 0.8s ease-out; /* Added animation from register.css */
-  width: 100%; /* Ensure it takes full width up to max-width */
-  max-width: 1000px;
 }
 
-.agb-header::before {
-  /* Removed the top gradient line as it's not in register.css */
-  content: none;
-}
-
-/* Logo Styles - Adapted from register.css */
-.agb-logo {
-  width: 80px; /* Consistent width */
-  height: 80px; /* Consistent height */
+/* Sticky Top Navigation Bar */
+.agb-top-nav {
   background: white;
-  border-radius: 50%;
+  padding: 20px 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid #e2e8f0;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  margin: 0 auto 20px; /* Consistent margin */
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); /* Consistent shadow */
-  border: 3px solid #1976d2; /* Consistent border color */
-  overflow: hidden;
-  margin-bottom: 20px; /* Adjusted margin-bottom to match register.css */
+  width: 100%;
+  animation: fadeInDown 0.6s ease-out;
 }
 
-.agb-logo-img {
-  width: 100%; /* Consistent width */
-  height: 100%; /* Consistent height */
-  object-fit: contain; /* Changed to contain for logo consistency */
-  padding: 8px; /* Added padding from register.css */
-  border-radius: 50%; /* Keep border-radius for circular image */
-  transition: transform 0.3s ease;
+.agb-sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.95);
 }
 
-.agb-logo-img:hover {
-  transform: scale(1.1);
-}
-
-/* Company Name and Subtitle - Adapted from register.css */
-.agb-company-name {
-  font-size: 32px; /* Consistent font size */
+.agb-nav-title {
+  font-size: 28px;
   font-weight: 700;
-  color: #1565c0; /* Consistent color */
-  margin: 0 0 8px 0; /* Consistent margin */
-  text-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Consistent text shadow */
-  background: none; /* Removed gradient text fill */
-  -webkit-background-clip: unset;
-  -webkit-text-fill-color: unset;
-  background-clip: unset;
+  color: #1e40af;
+  margin: 0;
+  background: linear-gradient(135deg, #1e40af, #3b82f6);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.agb-company-subtitle {
-  font-size: 16px; /* Consistent font size */
-  color: #666; /* Consistent color */
-  margin: 0 0 15px 0; /* Consistent margin */
-  font-weight: 500;
-}
-
-/* Contact Info - Adapted from register.css */
-.agb-contact-info {
+.agb-nav-actions {
   display: flex;
-  justify-content: center;
-  align-items: center; /* Added align-items */
-  flex-direction: column; /* Changed to column for consistency */
-  gap: 8px; /* Consistent gap */
-  font-size: 11px; /* Consistent font size */
-  color: #777; /* Consistent color */
-  text-align: center;
-  margin-bottom: 15px; /* Adjusted margin-bottom */
-}
-
-.agb-contact-info span {
-  display: flex;
+  gap: 16px;
   align-items: center;
-  gap: 5px; /* Consistent gap */
-  font-size: 11px; /* Ensure consistency */
-  color: #777; /* Ensure consistency */
-  font-weight: 500; /* Adjusted font-weight */
-  padding: 0; /* Removed padding */
-  background: none; /* Removed background */
-  border-radius: 0; /* Removed border-radius */
-  transition: none; /* Removed transition */
+  flex-wrap: wrap;
 }
 
-.agb-contact-info span:hover {
-  background: none;
-  transform: none;
+.agb-nav-welcome {
+  font-weight: 600;
+  color: #475569;
+  font-size: 14px;
 }
 
-/* Logout Section */
-.agb-logout-section {
-  margin-top: 1rem;
-}
+/* Responsive visibility classes */
+.hidden { display: none; }
+@media (min-width: 640px) { .sm\:inline { display: inline; } }
+@media (min-width: 768px) { .md\:inline { display: inline; } }
+@media (min-width: 1024px) { .lg\:inline { display: inline; } }
+@media (min-width: 1280px) { .xl\:inline { display: inline; } }
 
-/* Buttons - Adapted from register.css */
+/* Buttons */
 .agb-btn {
-  width: 100%; /* Full width for consistency with register buttons */
-  padding: 14px 20px; /* Consistent padding */
+  padding: 12px 16px;
   border: none;
-  border-radius: 8px; /* Consistent border-radius */
-  font-size: 16px; /* Consistent font size */
+  border-radius: 8px;
+  font-size: 14px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px; /* Consistent gap */
-  text-transform: uppercase; /* Consistent text transform */
-  letter-spacing: 0.5px; /* Consistent letter spacing */
+  gap: 6px;
   text-decoration: none;
+  white-space: nowrap;
 }
 
-.agb-btn-link { /* Used for logout button in dashboard template */
-  background: none; /* Changed to no background for link style */
-  color: #1976d2; /* Consistent link color */
+.agb-btn-link {
+  background: none;
+  color: #3b82f6;
   border: none;
-  padding-left: 10px; /* Consistent padding */
-  text-decoration: none; /* Consistent underline */
-  font-size: 14px; /* Consistent font size */
+  padding: 12px 16px;
+  text-decoration: none;
+  font-size: 14px;
   font-weight: 600;
-  text-transform: none; /* Removed uppercase */
-  letter-spacing: normal; /* Removed letter spacing */
-  width: auto; /* Allow width to be content-based */
 }
 
 .agb-btn-link:hover {
-  background: rgba(25, 118, 210, 0.1); /* Consistent hover background */
-  transform: none; /* Removed transform */
-  color: #1976d2; /* Keep color consistent on hover */
-  box-shadow: none; /* Removed box-shadow */
-  text-decoration: none; /* Removed underline on hover */
+  background: rgba(59, 130, 246, 0.1);
+  transform: translateY(-1px);
+  color: #1d4ed8;
+  border-radius: 8px;
+}
+
+
+.agb-btn-refresh:hover:not(:disabled) {
+  background: linear-gradient(135deg, #059669, #047857);
+  transform: translateY(-1px);
+}
+
+.agb-btn-refresh:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.agb-btn-refresh.refreshing .fa-refresh {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 .agb-btn-primary {
-  background: linear-gradient(135deg, #1976d2, #1565c0); /* Consistent gradient */
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
   color: white;
-  box-shadow: 0 4px 15px rgba(25, 118, 210, 0.3); /* Consistent shadow */
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
 }
 
 .agb-btn-primary:hover {
-  background: linear-gradient(135deg, #1565c0, #0d47a1); /* Consistent hover gradient */
+  background: linear-gradient(135deg, #1d4ed8, #1e3a8a);
   transform: translateY(-2px);
-  color: white;
-  box-shadow: 0 6px 20px rgba(25, 118, 210, 0.4); /* Consistent hover shadow */
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
 }
 
-/* Main Content - Adapted from register.css form card */
-.agb-main-content {
-  background: white; /* Consistent white background */
-  backdrop-filter: none; /* Removed blur */
-  border-radius: 16px; /* Consistent border-radius */
-  padding: 30px 25px; /* Consistent padding */
-  margin-bottom: 30px; /* Consistent margin */
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1); /* Consistent shadow */
-  border: 1px solid #e0e0e0; /* Consistent border */
-  width: 100%; /* Ensure it takes full width up to max-width */
-  max-width: 1000px; /* Consistent max-width */
-  animation: fadeInUp 0.8s ease-out; /* Added animation */
+/* Main Content Wrapper */
+.agb-main-content-wrapper {
+  flex: 1;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
 }
 
-/* Form Card (used for quick info and calendar grid) - Adapted from register.css form card */
+.agb-dashboard-content {
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* Form Card */
 .agb-form-card {
-  background: white; /* Consistent white background */
-  backdrop-filter: none; /* Removed blur */
-  border-radius: 16px; /* Consistent border-radius */
-  padding: 30px 25px; /* Consistent padding */
-  margin-bottom: 30px; /* Consistent margin */
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1); /* Consistent shadow */
-  border: 1px solid #e0e0e0; /* Consistent border */
+  background: white;
+  border-radius: 20px;
+  padding: 32px;
+  margin-bottom: 24px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e2e8f0;
   transition: all 0.3s ease;
+  width: 100%;
+  max-width: 1200px;
 }
 
 .agb-form-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15); /* Slightly adjusted hover shadow */
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
 }
 
-/* Welcome Section */
-.agb-welcome-section {
-  margin-bottom: 2rem;
-}
-
-.agb-welcome-header {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  padding: 30px 25px; /* Consistent padding */
-  background: linear-gradient(135deg, #1976d2, #388e3c); /* Consistent gradient from register form header */
-  border-radius: 16px;
-  color: white;
-  box-shadow: 0 10px 30px rgba(25, 118, 210, 0.3); /* Adjusted shadow color */
-  position: relative;
-  overflow: hidden;
-}
-
-.agb-welcome-header::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
-  pointer-events: none;
-}
-
-.agb-welcome-icon {
-  font-size: 24px; /* Consistent with register form header icon */
-  background: rgba(255, 255, 255, 0.2);
-  padding: 1rem;
-  border-radius: 50%;
-  backdrop-filter: blur(10px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 80px;
-  height: 80px;
-}
-
-.agb-welcome-text h2 {
-  font-size: 24px; /* Consistent with register form header h2 */
-  font-weight: 600;
-  margin-bottom: 8px; /* Consistent margin */
-}
-
-.agb-welcome-text p {
-  opacity: 0.9;
-  font-size: 14px; /* Consistent with register form header p */
-}
-
-/* Stats Grid */
+/* Stats Grid - Updated for 2 cards on mobile */
 .agb-stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 1.5rem;
-  margin-bottom: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  margin-bottom: 32px;
+  margin-top: 32px;
 }
 
 .agb-stat-card {
-  background: white; /* Consistent white background */
-  backdrop-filter: none; /* Removed blur */
-  border-radius: 16px; /* Consistent border-radius */
-  padding: 2rem;
+  background: white;
+  border-radius: 20px;
+  padding: 24px;
   display: flex;
   align-items: center;
-  gap: 1.5rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+  gap: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
-  border: 1px solid #e0e0e0; /* Consistent border */
+  border: 1px solid #e2e8f0;
   position: relative;
   overflow: hidden;
-  animation: fadeInUp 0.5s ease-out; /* Added animation */
+  animation: fadeInUp 0.5s ease-out;
 }
 
 .agb-stat-card::before {
@@ -314,451 +210,449 @@ body {
   left: 0;
   width: 100%;
   height: 4px;
-  background: var(--accent-color, linear-gradient(90deg, #1976d2, #388e3c)); /* Adjusted default accent color */
+  background: var(--accent-gradient);
   transition: height 0.3s ease;
 }
 
 .agb-stat-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
 }
 
 .agb-stat-card:hover::before {
-  height: 8px;
+  height: 6px;
 }
 
 .agb-stat-attendance {
-  --accent-color: #388e3c; /* Green from register success */
+  --accent-gradient: linear-gradient(90deg, #10b981, #059669);
 }
 
-.agb-stat-absent {
-  --accent-color: #d32f2f; /* Red from register danger */
-}
-
-.agb-stat-late {
-  --accent-color: #ff9800; /* Orange from register forgot header */
+.agb-stat-leave {
+  --accent-gradient: linear-gradient(90deg, #8b5cf6, #7c3aed);
 }
 
 .agb-stat-icon {
-  font-size: 2rem;
-  width: 80px;
-  height: 80px;
+  width: 72px;
+  height: 72px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 16px;
   color: white;
-  background: var(--accent-color);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  background: var(--accent-gradient);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  flex-shrink: 0;
+  font-size: 32px;
 }
 
 .agb-stat-content {
   flex: 1;
+  min-width: 0;
 }
 
 .agb-stat-content h3 {
-  font-size: 1.2rem;
+  font-size: 18px;
   color: #374151;
-  margin-bottom: 0.5rem;
+  margin-bottom: 8px;
   font-weight: 600;
 }
 
 .agb-stat-number {
-  font-size: 3rem;
-  font-weight: 700;
-  color: var(--accent-color);
-  margin-bottom: 0.25rem;
+  font-size: 36px;
+  font-weight: 800;
+  background: var(--accent-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 4px;
+  line-height: 1;
 }
 
-.agb-stat-content p {
+.agb-stat-details {
   color: #6b7280;
-  font-size: 0.9rem;
+  font-size: 13px;
+  line-height: 1.5;
 }
 
-.agb-stat-arrow {
-  font-size: 1.2rem;
-  color: #9ca3af;
-  transition: all 0.3s ease;
+.agb-stat-link {
+  text-decoration: underline;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  font-size: inherit;
 }
 
-.agb-stat-card:hover .agb-stat-arrow {
-  color: var(--accent-color);
-  transform: translateX(4px);
+.agb-stat-link-orange {
+  color: #f59e0b;
 }
 
-/* Quick Info - Adapted from register.css alert styles */
+.agb-stat-link-orange:hover {
+  color: #d97706;
+}
+
+.agb-stat-link-red {
+  color: #ef4444;
+}
+
+.agb-stat-link-red:hover {
+  color: #dc2626;
+}
+
+.agb-stat-action {
+  flex-shrink: 0;
+}
+
+/* Quick Info */
 .agb-quick-info {
-  background: linear-gradient(135deg, #e3f2fd, #c8e6c9); /* Blend of light blue and green from register alerts */
+  background: linear-gradient(135deg, #f0f9ff, #ecfdf5);
   border-radius: 16px;
-  padding: 2rem;
-  border-left: 4px solid #1976d2; /* Primary color border */
-  margin-bottom: 30px; /* Consistent margin */
+  padding: 28px;
+  border-left: 4px solid #3b82f6;
 }
 
-.agb-form-header { /* Re-used for quick info header */
+.agb-form-header {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 1.5rem;
-  color: #1976d2; /* Primary color */
+  gap: 12px;
+  margin-bottom: 24px;
+  color: #1e40af;
 }
 
-.agb-quick-info h3 {
-  font-size: 1.4rem;
-  color: #1565c0; /* Darker primary color */
+.agb-form-header h3 {
+  font-size: 20px;
   font-weight: 600;
+  margin: 0;
 }
 
 .agb-info-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
 }
 
 .agb-info-item {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 1rem;
+  gap: 12px;
+  padding: 16px 20px;
   background: white;
   border-radius: 12px;
   font-weight: 500;
   color: #374151;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
   transition: all 0.3s ease;
-  border: 1px solid #e0e0e0; /* Added border for consistency */
+  border: 1px solid #f1f5f9;
 }
 
 .agb-info-item:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  border-color: #e2e8f0;
 }
 
 .agb-info-item i {
-  color: #1976d2; /* Primary color */
-  font-size: 1.1rem;
+  color: #3b82f6;
+  flex-shrink: 0;
+  font-size: 20px;
 }
 
-/* Calendar Styles */
+/* Calendar Styles - Enhanced Responsiveness */
 .agb-calendar-container {
-  max-width: 1000px; /* Consistent max-width */
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 20px; /* Added padding for consistency */
-}
-
-.agb-calendar-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 30px; /* Consistent margin */
-  flex-wrap: wrap;
-  gap: 1rem;
-  position: relative;
-}
-
-.agb-calendar-header h2 {
-  color: #1f2937;
-  font-size: 2rem;
-  font-weight: 600;
 }
 
 .agb-calendar-navigation {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 2rem;
-  margin-bottom: 2rem;
+  gap: 24px;
+  margin-bottom: 24px;
 }
 
 .agb-calendar-navigation h3 {
-  font-size: 1.8rem;
+  font-size: 24px;
   color: #1f2937;
-  font-weight: 600;
-  min-width: 250px;
+  font-weight: 700;
+  min-width: 280px;
   text-align: center;
+}
+
+.agb-calendar-navigation button {
+  padding: 12px;
+  border: none;
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: white;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+}
+
+.agb-calendar-navigation button:hover {
+  background: linear-gradient(135deg, #1d4ed8, #1e3a8a);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
 }
 
 /* Calendar Legend */
 .agb-calendar-legend {
   display: flex;
   justify-content: center;
-  gap: 2rem;
-  margin-bottom: 2rem;
+  gap: 24px;
+  margin-bottom: 24px;
   flex-wrap: wrap;
-  padding: 1rem;
-  background: linear-gradient(135deg, #e3f2fd, #c8e6c9); /* Consistent with quick info */
-  border-radius: 12px;
-  border-left: 4px solid #1976d2; /* Consistent with quick info */
+  padding: 20px;
+  background: linear-gradient(135deg, #f0f9ff, #ecfdf5);
+  border-radius: 16px;
+  border-left: 4px solid #3b82f6;
 }
 
 .agb-legend-item {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-size: 0.9rem;
+  gap: 8px;
+  font-size: 14px;
   color: #374151;
   font-weight: 500;
 }
 
-.agb-legend-dots {
-  display: flex;
-  gap: 2px;
-}
-
-.agb-dot {
-  width: 10px;
-  height: 10px;
+.agb-legend-dot {
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
-  transition: all 0.3s ease;
+  flex-shrink: 0;
 }
 
-.agb-dot-green {
-  background: #388e3c; /* Consistent green */
+.agb-dot-present {
+  background-color: #10b981;
 }
 
-.agb-dot-red {
-  background: #d32f2f; /* Consistent red */
+.agb-dot-absent {
+  background-color: #ef4444;
 }
 
-/* Calendar Grid - Adapted from agb-form-card */
+.agb-dot-weekend {
+  background-color: #6b7280;
+}
+
+.agb-calendar-partial {
+    background-color: #fff3cd; 
+}
+
+.agb-dot-holiday {
+  background-color: #3b82f6;
+}
+
+.agb-dot-leave {
+  background-color: #f59e0b;
+}
+
+/* Calendar Grid - Improved Mobile Responsiveness */
 .agb-calendar-grid {
   background: white;
-  backdrop-filter: none;
-  border-radius: 16px;
-  padding: 30px 25px; /* Consistent padding */
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1); /* Consistent shadow */
-  border: 1px solid #e0e0e0; /* Consistent border */
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e2e8f0;
 }
 
 .agb-calendar-header-row {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 0.5rem;
-  margin-bottom: 1rem;
+  gap: 4px;
+  margin-bottom: 12px;
 }
 
 .agb-calendar-header-cell {
   text-align: center;
-  font-weight: 600;
-  color: #6b7280;
-  padding: 1rem;
-  font-size: 0.9rem;
-  background: rgba(25, 118, 210, 0.05); /* Light primary color background */
+  font-weight: 700;
+  color: #475569;
+  padding: 12px 4px;
+  font-size: 14px;
+  background: rgba(59, 130, 246, 0.06);
   border-radius: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .agb-calendar-body {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 0.5rem;
+  gap: 4px;
 }
 
 .agb-calendar-day {
   min-height: 80px;
-  border: 1px solid rgba(25, 118, 210, 0.2); /* Border with primary color tint */
+  border: 2px solid transparent;
   border-radius: 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   position: relative;
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(5px);
-  transition: all 0.3s ease;
+  background: #ffffff;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
-  animation: slideInRight 0.3s ease-out; /* Added animation */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
-.agb-calendar-day:hover {
-  background: rgba(25, 118, 210, 0.1); /* Hover with primary color tint */
+.agb-calendar-day:not(.agb-calendar-day-empty):hover {
+  background: rgba(59, 130, 246, 0.08);
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  border-color: #93c5fd;
 }
 
 .agb-calendar-day-empty {
-  border: none;
   background: transparent;
   cursor: default;
-}
-
-.agb-calendar-day-empty:hover {
-  transform: none;
   box-shadow: none;
 }
 
 .agb-calendar-weekend {
-  background: rgba(107, 114, 128, 0.1);
-  color: #6b7280;
+  background: #f8fafc !important;
+  color: #64748b;
+  border-color: #e2e8f0;
+}
+
+.agb-calendar-present {
+  background: linear-gradient(135deg, #ecfdf5, #f0fdf4) !important;
+  border-color: #22c55e;
+  color: #166534;
+}
+
+.agb-calendar-absent {
+  background: linear-gradient(135deg, #fef2f2, #fff5f5) !important;
+  border-color: #ef4444;
+  color: #991b1b;
+}
+
+.agb-calendar-partial{
+  background: linear-gradient(135deg, #ecfdf5, #f0fdf4) !important;
+  border-color: #22c55e;
+  color: #166534;
+}
+
+.agb-calendar-future {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+.agb-calendar-today {
+  border-color: #3b82f6 !important;
+  border-width: 3px;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
 }
 
 .agb-day-number {
   font-weight: 600;
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
-  color: #374151;
+  font-size: 16px;
+  margin-bottom: 6px;
 }
 
 .agb-attendance-dots {
+  position: absolute;
+  bottom: 6px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   gap: 4px;
-  position: absolute;
-  bottom: 0.5rem;
 }
 
-/* Details Styles */
+.agb-attendance-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+/* Detail Cards */
 .agb-details-container {
-  max-width: 1000px; /* Consistent max-width */
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 20px; /* Added padding for consistency */
 }
 
-.agb-details-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 30px; /* Consistent margin */
-  padding-bottom: 1rem;
-  border-bottom: 1px solid #e0e0e0; /* Consistent border color */
-  position: relative;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.agb-details-header > div {
-  flex: 1;
-  min-width: 200px;
-}
-
-.agb-details-header h2 {
-  color: #1f2937;
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
-  font-weight: 600;
-}
-
-.agb-details-header p {
-  color: #6b7280;
-  font-size: 1rem;
-}
-
-.agb-details-stats {
-  background: white; /* Consistent white background */
-  backdrop-filter: none; /* Removed blur */
-  border-radius: 16px; /* Consistent border-radius */
-  padding: 30px 25px; /* Consistent padding */
-  margin-bottom: 30px; /* Consistent margin */
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1); /* Consistent shadow */
-  border: 1px solid #e0e0e0; /* Consistent border */
-}
-
-.agb-stat-summary {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1.5rem;
-  padding: 1.5rem;
-  background: linear-gradient(135deg, #e3f2fd, #c8e6c9); /* Consistent with quick info */
-  border-radius: 12px;
-  border-left: 4px solid #1976d2; /* Consistent with quick info */
-}
-
-.agb-stat-item {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.agb-stat-label {
-  display: block;
-  color: #6b7280;
-  font-size: 0.8rem;
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.agb-stat-value {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #1976d2; /* Primary color */
-}
-
-/* Detail Cards - Adapted from agb-form-card */
 .agb-details-list {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 20px;
 }
 
 .agb-detail-card {
   background: white;
-  backdrop-filter: none;
-  border-radius: 16px; /* Consistent border-radius */
-  padding: 2rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e0e0e0; /* Consistent border */
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e2e8f0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1.5rem;
-  transition: all 0.3s ease;
-  flex-wrap: wrap;
-  animation: fadeInUp 0.5s ease-out; /* Added animation */
+  gap: 24px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: fadeInUp 0.5s ease-out;
 }
 
 .agb-detail-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
 }
 
 .agb-detail-date {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  min-width: 250px;
+  gap: 16px;
+  min-width: 280px;
 }
 
 .agb-detail-date i {
-  color: #1976d2; /* Primary color */
-  font-size: 1.2rem;
+  color: #3b82f6;
+  flex-shrink: 0;
+  font-size: 24px;
 }
 
-.agb-detail-date div h3 {
-  font-size: 1rem;
+.agb-detail-date h3 {
+  font-size: 16px;
   color: #1f2937;
-  margin-bottom: 0.25rem;
+  margin-bottom: 4px;
   font-weight: 600;
 }
 
-.agb-detail-date div p {
+.agb-detail-date p {
   color: #6b7280;
-  font-size: 0.8rem;
+  font-size: 13px;
 }
 
 .agb-detail-times {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 8px;
   flex: 1;
+  min-width: 0;
 }
 
 .agb-time-item {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-size: 0.9rem;
+  gap: 8px;
+  font-size: 14px;
 }
 
 .agb-time-item i {
   color: #6b7280;
-  width: 16px;
+  flex-shrink: 0;
+  font-size: 16px;
 }
 
 .agb-time-label {
   color: #374151;
   font-weight: 500;
   min-width: 80px;
+  flex-shrink: 0;
 }
 
 .agb-time-value {
@@ -766,73 +660,40 @@ body {
   font-weight: 600;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 6px;
 }
 
-.agb-time-display {
-  font-weight: 600;
-}
-
-.agb-absent-text {
-  color: #d32f2f; /* Consistent red */
-  font-style: italic;
-}
-
-.agb-status-present {
-  color: #388e3c; /* Consistent green */
-}
-
-.agb-status-absent {
-  color: #d32f2f; /* Consistent red */
+.agb-absent-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #dc2626;
 }
 
 .agb-late-indicator {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  color: #ff9800; /* Consistent orange */
+  gap: 8px;
+  color: #f59e0b;
   font-weight: 600;
-  font-size: 0.85rem;
+  font-size: 13px;
 }
 
 .agb-late-minutes {
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .agb-detail-status {
   text-align: center;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
+  padding: 8px 16px;
+  border-radius: 24px;
   font-weight: 700;
-  font-size: 0.75rem;
+  font-size: 11px;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  min-width: 120px;
-}
-
-.agb-absent-btn {
-  display: inline-block;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  font-weight: bold;
+  letter-spacing: 0.5px;
+  min-width: 100px;
   color: white;
-  text-align: center;
-  min-width: 120px;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.agb-absent-btn.agb-morning {
-  background-color: #ff9800; /* Consistent orange */
-}
-
-.agb-absent-btn.agb-evening {
-  background-color: #f57c00; /* Darker orange */
-}
-
-.agb-absent-btn.agb-full_day {
-  background-color: #d32f2f; /* Consistent red */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .agb-status-late {
@@ -840,618 +701,747 @@ body {
 }
 
 .agb-severity-low {
-  background: #388e3c; /* Consistent green */
+  background: linear-gradient(135deg, #22c55e, #16a34a);
 }
 
 .agb-severity-medium {
-  background: #ff9800; /* Consistent orange */
+  background: linear-gradient(135deg, #f59e0b, #d97706);
 }
 
 .agb-severity-high {
-  background: #d32f2f; /* Consistent red */
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+.agb-status-absent {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+
+/* Modal Styles */
+.agb-day-details-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.agb-day-details-modal.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.agb-day-details-content {
+  background: white;
+  border-radius: 20px;
+  padding: 32px;
+  max-width: 540px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3);
+  transform: translateY(-20px);
+  transition: transform 0.3s ease;
+}
+
+.agb-day-details-modal.show .agb-day-details-content {
+  transform: translateY(0);
+}
+
+.agb-day-details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.agb-day-details-header h3 {
+  font-size: 20px;
+  color: #1e40af;
+  margin: 0;
+  font-weight: 700;
+}
+
+.agb-close-modal {
+  background: none;
+  border: none;
+  color: #6b7280;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.agb-close-modal:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: #374151;
+}
+
+.agb-day-details-info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.agb-detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.agb-detail-row:last-child {
+  border-bottom: none;
+}
+
+.agb-detail-label {
+  font-weight: 600;
+  color: #374151;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.agb-detail-value {
+  color: #1f2937;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.agb-status-badge {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.agb-status-present {
+  background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+  color: #166534;
+}
+
+.agb-status-partial {
+  background: linear-gradient(135deg, #fef3c7, #fef9c3);
+  color: #caa50f;
+
+}
+
+.agb-status-absent {
+  background: linear-gradient(135deg, #fef2f2, #fecaca);
+  color: #991b1b;
+}
+
+.agb-status-weekend {
+  background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+  color: #475569;
 }
 
 /* No Data State */
 .agb-no-data {
   text-align: center;
-  padding: 4rem 2rem;
+  padding: 60px 32px;
   color: #6b7280;
 }
 
-.agb-no-data-icon {
-  color: #9ca3af;
-  margin-bottom: 1rem;
-}
-
 .agb-no-data h3 {
-  font-size: 1.25rem;
+  font-size: 20px;
   font-weight: 600;
   color: #374151;
-  margin-bottom: 0.5rem;
+  margin: 16px 0 8px;
 }
 
 .agb-no-data p {
-  font-size: 0.9rem;
+  font-size: 14px;
+  color: #6b7280;
 }
 
-/* Loading and Error States - Adapted from register.css alerts */
-.agb-loading,
-.agb-error {
-  text-align: center;
-  padding: 4rem 2rem;
-  background: linear-gradient(135deg, #ffebee, #ffcdd2); /* Consistent with danger alert */
-  border-radius: 16px; /* Consistent border-radius */
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1); /* Consistent shadow */
-  border: 1px solid #e0e0e0; /* Consistent border */
-  border-left: 4px solid #d32f2f; /* Consistent danger border */
-  animation: slideInDown 0.5s ease-out; /* Added animation */
+.agb-no-data i {
+  color: #d1d5db;
+  margin-bottom: 16px;
 }
 
-.agb-loading h3,
-.agb-error h3 {
-  font-size: 1.25rem;
-  margin: 1rem 0 0.5rem;
-  color: #c62828; /* Consistent danger color */
-  font-weight: 600;
-}
-
-.agb-loading p,
-.agb-error p {
-  color: #d32f2f; /* Consistent danger color */
-  font-size: 0.9rem;
-}
-
-.agb-error {
-  color: #d32f2f; /* Consistent danger color */
-}
-
-/* Footer - Adapted from register.css */
+/* Sticky Footer */
 .agb-footer {
-  background: white; /* Consistent white background */
-  backdrop-filter: none; /* Removed blur */
-  border-radius: 16px; /* Consistent border-radius */
-  padding: 20px; /* Consistent padding */
+  background: white;
+  padding: 24px;
   text-align: center;
-  color: #666; /* Consistent color */
-  font-size: 12px; /* Consistent font size */
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1); /* Consistent shadow */
-  border: 1px solid #e0e0e0; /* Consistent border */
-  margin-top: 30px; /* Consistent margin */
-  animation: fadeIn 1s ease-out; /* Added animation */
-  width: 100%; /* Ensure it takes full width up to max-width */
-  max-width: 1000px;
+  color: #6b7280;
+  font-size: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+  border-top: 1px solid #e2e8f0;
+  animation: fadeIn 1s ease-out;
+  width: 100%;
+}
+
+.agb-sticky-footer {
+  position: sticky;
+  bottom: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.95);
 }
 
 .agb-footer p {
-  margin: 5px 0; /* Consistent margin */
+  margin: 4px 0;
 }
 
-/* Responsive Design - Harmonized breakpoints and styles */
-@media (max-width: 1200px) {
-  .agb-stats-grid {
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  }
-  
-  .agb-calendar-container {
-    max-width: 100%;
-  }
+.agb-footer p:first-child {
+  font-weight: 600;
+  color: #475569;
 }
 
-@media (max-width: 768px) {
-  .agb-container {
-    padding: 15px; /* Consistent padding */
+/* Utility classes */
+.agb-text-red {
+  color: #ef4444;
+}
+
+/* Enhanced Mobile Responsiveness */
+
+/* Large tablets and small desktops */
+@media (max-width: 1024px) {
+  .agb-main-content-wrapper {
+    padding: 20px;
   }
-  
-  .agb-header {
-    padding: 25px 20px; /* Consistent padding */
-    border-radius: 16px; /* Consistent border-radius */
-    margin: 20px 0; /* Consistent margin */
-  }
-  
-  .agb-main-content,
-  .agb-form-card {
-    border-radius: 16px; /* Consistent border-radius */
-    padding: 25px 20px; /* Consistent padding */
-    margin: 20px 0; /* Consistent margin */
-  }
-  
-  .agb-company-name {
-    font-size: 28px; /* Consistent font size */
-  }
-  
-  .agb-company-subtitle {
-    font-size: 1rem;
-  }
-  
-  .agb-contact-info {
-    flex-direction: column;
-    gap: 8px; /* Consistent gap */
-  }
-  
-  .agb-welcome-header {
-    flex-direction: column;
-    text-align: center;
-    gap: 1rem;
-    padding: 25px 20px; /* Consistent padding */
-  }
-  
-  .agb-welcome-text h2 {
-    font-size: 1.5rem;
-  }
-  
+
   .agb-stats-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-  
-  .agb-stat-card {
-    padding: 1.5rem;
-  }
-  
-  .agb-stat-number {
-    font-size: 2.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
   }
   
   .agb-info-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .agb-calendar-day {
+    min-height: 70px;
+  }
+
+  .agb-day-number {
+    font-size: 15px;
+  }
+}
+
+/* Tablets */
+@media (max-width: 768px) {
+  .agb-main-content-wrapper {
+    padding: 16px;
+  }
+  
+  .agb-top-nav {
+    padding: 20px 24px;
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+
+  .agb-nav-actions {
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .agb-nav-welcome {
+    font-size: 13px;
+  }
+
+  .agb-nav-title {
+    font-size: 24px;
+  }
+
+  .agb-form-card {
+    padding: 24px;
+    border-radius: 16px;
+  }
+  
+  /* Key change: Stats grid shows 2 cards per row on mobile */
+  .agb-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  
+  .agb-stat-card {
+    padding: 16px;
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+    min-height: 140px;
+  }
+
+  .agb-stat-icon {
+    width: 56px;
+    height: 56px;
+    font-size: 28px;
+  }
+
+  .agb-stat-content {
+    text-align: center;
+  }
+  
+  .agb-stat-number {
+    font-size: 28px;
+  }
+
+  .agb-stat-content h3 {
+    font-size: 16px;
+    margin-bottom: 6px;
+  }
+
+  .agb-stat-details {
+    font-size: 11px;
+    line-height: 1.4;
+  }
+
+  .agb-stat-action {
+    margin-top: 8px;
+  }
+
+  .agb-stat-action .agb-btn-link {
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+  
+  .agb-info-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .agb-info-item {
+    padding: 14px 16px;
+    font-size: 13px;
   }
   
   .agb-calendar-navigation {
-    gap: 1rem;
+    gap: 16px;
+    margin-bottom: 20px;
   }
   
   .agb-calendar-navigation h3 {
-    font-size: 1.4rem;
+    font-size: 20px;
     min-width: auto;
   }
   
-  .agb-calendar-header {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  
-  .agb-details-header {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  
   .agb-calendar-legend {
-    gap: 1rem;
+    gap: 12px;
+    padding: 16px;
     flex-direction: column;
     align-items: center;
+  }
+
+  .agb-legend-item {
+    font-size: 13px;
   }
   
   .agb-calendar-grid {
-    padding: 1rem;
+    padding: 16px;
   }
-  
+
+  /* Better mobile calendar sizing */
   .agb-calendar-day {
     min-height: 60px;
+  }
+
+  .agb-day-number {
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+
+  .agb-attendance-dot {
+    width: 5px;
+    height: 5px;
+  }
+
+  .agb-attendance-dots {
+    bottom: 4px;
+    gap: 3px;
   }
   
   .agb-detail-card {
     flex-direction: column;
     align-items: stretch;
-    gap: 1rem;
-    padding: 1.5rem;
+    gap: 16px;
+    padding: 20px;
   }
   
   .agb-detail-date {
     min-width: auto;
     justify-content: center;
   }
-  
-  .agb-stat-summary {
-    grid-template-columns: 1fr;
-    gap: 1rem;
+
+  .agb-detail-times {
+    align-items: center;
   }
 
-  .agb-alert { /* Consistent with register.css */
-    margin: 15px 20px;
+  .agb-time-item {
+    justify-content: space-between;
+    font-size: 13px;
   }
 }
 
+/* Small mobile devices */
 @media (max-width: 480px) {
-  .agb-container {
-    padding: 10px; /* Consistent padding */
+  .agb-main-content-wrapper {
+    padding: 12px;
   }
   
-  .agb-header,
-  .agb-main-content,
+  .agb-top-nav {
+    padding: 16px 20px;
+  }
+  
+  .agb-nav-title {
+    font-size: 20px;
+  }
+
+
+
   .agb-form-card {
-    padding: 1rem;
-    border-radius: 12px; /* Consistent border-radius */
-    margin: 10px 0; /* Consistent margin */
+    padding: 20px;
+    margin-bottom: 16px;
   }
-  
-  .agb-company-name {
-    font-size: 24px; /* Consistent font size */
-    line-height: 1.2;
-  }
-  
-  .agb-logo-img {
-    width: 60px;
-    height: 60px;
-  }
-  
-  .agb-welcome-icon {
-    width: 60px;
-    height: 60px;
-    font-size: 2rem;
-  }
-  
-  .agb-welcome-text h2 {
-    font-size: 1.3rem;
+
+  /* Optimized stats grid for very small screens */
+  .agb-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
   }
   
   .agb-stat-card {
-    flex-direction: column;
-    text-align: center;
-    gap: 1rem;
+    padding: 12px;
+    min-height: 120px;
+    gap: 8px;
   }
   
   .agb-stat-icon {
-    width: 60px;
-    height: 60px;
-    font-size: 1.5rem;
+    width: 48px;
+    height: 48px;
+    font-size: 24px;
   }
   
   .agb-stat-number {
-    font-size: 2rem;
-  }
-  
-  .agb-calendar-header-cell {
-    padding: 0.5rem;
-    font-size: 0.8rem;
-  }
-  
-  .agb-calendar-body {
-    gap: 0.25rem;
-  }
-  
-  .agb-calendar-day {
-    min-height: 50px;
-    border-radius: 8px;
-  }
-  
-  .agb-day-number {
-    font-size: 0.8rem;
-  }
-  
-  .agb-dot {
-    width: 6px;
-    height: 6px;
-  }
-
-  .agb-alert { /* Consistent with register.css */
-    margin: 15px;
-    padding: 12px 15px;
-    font-size: 13px;
-  }
-
-  .agb-footer { /* Consistent with register.css */
-    font-size: 10px;
-    margin-top: 20px;
-  }
-}
-
-@media (max-width: 360px) {
-  .agb-container {
-    padding: 8px; /* Consistent padding */
-  }
-
-  .agb-form-card {
-    margin: 5px 0; /* Consistent margin */
-    border-radius: 8px; /* Consistent border-radius */
-  }
-
-  .agb-company-name {
-    font-size: 20px; /* Consistent font size */
-  }
-
-  .agb-logo {
-    width: 50px;
-    height: 50px;
-  }
-
-  .agb-header,
-  .agb-main-content {
-    padding: 15px 10px; /* Consistent padding */
-  }
-
-  .agb-alert { /* Consistent with register.css */
-    margin: 10px;
-    padding: 10px 12px;
-  }
-}
-
-/* Landscape orientation adjustments - Harmonized */
-@media (max-height: 600px) and (orientation: landscape) {
-  .agb-container {
-    padding: 10px;
-    justify-content: flex-start;
-  }
-
-  .agb-form-card {
-    margin: 10px 0;
-  }
-
-  .agb-header {
-    margin-bottom: 15px;
-  }
-
-  .agb-logo {
-    width: 50px;
-    height: 50px;
-    margin-bottom: 10px;
-  }
-
-  .agb-company-name {
-    font-size: 20px;
-    margin-bottom: 5px;
-  }
-
-  .agb-company-subtitle {
-    font-size: 12px;
-    margin-bottom: 10px;
-  }
-
-  .agb-welcome-header {
-    padding: 15px 20px;
-  }
-
-  .agb-main-content {
-    padding: 15px 20px;
-  }
-
-  .agb-footer {
-    margin-top: 15px;
-  }
-}
-
-/* Touch targets for mobile devices - Harmonized */
-@media (hover: none) {
-  .agb-btn {
-    min-height: 44px;
-  }
-
-  .agb-input { /* Assuming input might be present in dashboard forms */
-    min-height: 44px;
-  }
-
-  .agb-link-btn {
-    min-height: 44px;
-    padding: 10px 15px;
-  }
-}
-
-/* High DPI displays - Harmonized */
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-  .agb-logo-img {
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
-  }
-}
-
-/* Print Styles - Harmonized */
-@media print {
-  .agb-container {
-    background: white !important;
-  }
-
-  .agb-form-card,
-  .agb-header,
-  .agb-main-content,
-  .agb-footer { /* Apply to all main containers */
-    box-shadow: none !important;
-    border: 1px solid #ccc !important;
-  }
-
-  .agb-btn {
-    background: #ccc !important;
-    color: #000 !important;
-  }
-}
-
-/* Dark mode support - Harmonized */
-@media (prefers-color-scheme: dark) {
-  .agb-container {
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-  }
-
-  .agb-header,
-  .agb-main-content,
-  .agb-form-card,
-  .agb-calendar-grid,
-  .agb-details-stats,
-  .agb-detail-card,
-  .agb-footer {
-    background: #2d3748;
-    border-color: #4a5568;
-  }
-
-  .agb-company-name {
-    color: #90cdf4;
-  }
-
-  .agb-company-subtitle {
-    color: #a0aec0;
-  }
-
-  .agb-contact-info {
-    color: #a0aec0;
-  }
-
-  .agb-contact-info span { /* Ensure consistency for spans */
-    color: #a0aec0;
-  }
-
-  .agb-welcome-header {
-    background: linear-gradient(135deg, #0f3460, #1a1a2e); /* Darker gradient for welcome */
-    box-shadow: 0 10px 30px rgba(15, 52, 96, 0.3);
-  }
-
-  .agb-welcome-icon {
-    background: rgba(255, 255, 255, 0.1);
-  }
-
-  .agb-stat-card {
-    background: #2d3748;
-    border-color: #4a5568;
+    font-size: 24px;
   }
 
   .agb-stat-content h3 {
-    color: #e2e8f0;
+    font-size: 14px;
+    margin-bottom: 4px;
   }
 
-  .agb-stat-content p {
-    color: #a0aec0;
+  .agb-stat-details {
+    font-size: 10px;
+    line-height: 1.3;
   }
 
-  .agb-quick-info,
-  .agb-calendar-legend,
-  .agb-stat-summary {
-    background: linear-gradient(135deg, #16213e, #0f3460); /* Darker background for info sections */
-    border-left-color: #4299e1; /* Consistent primary color for border */
+  .agb-stat-action .agb-btn-link {
+    font-size: 11px;
+    padding: 6px 10px;
   }
 
-  .agb-quick-info h3 {
-    color: #90cdf4;
+  .agb-info-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
   }
 
   .agb-info-item {
-    background: #4a5568;
-    color: #e2e8f0;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    border-color: #718096;
+    padding: 12px;
+    font-size: 12px;
+    gap: 8px;
   }
-
-  .agb-info-item i {
-    color: #4299e1;
-  }
-
-  .agb-calendar-header h2,
-  .agb-calendar-navigation h3 {
-    color: #e2e8f0;
-  }
-
+  
   .agb-calendar-header-cell {
-    background: rgba(66, 153, 225, 0.1); /* Darker primary tint */
-    color: #a0aec0;
+    padding: 8px 2px;
+    font-size: 11px;
+  }
+  
+  .agb-calendar-body {
+    gap: 2px;
   }
 
+  /* Critical mobile calendar improvements */
   .agb-calendar-day {
-    background: #4a5568;
-    border-color: #718096;
-    color: #e2e8f0;
+    min-height: 48px;
+    border-radius: 8px;
+    border-width: 1px;
   }
 
-  .agb-calendar-day:hover {
-    background: rgba(66, 153, 225, 0.2);
+  .agb-calendar-today {
+    border-width: 2px !important;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.15);
   }
-
-  .agb-calendar-weekend {
-    background: rgba(113, 128, 150, 0.2);
-    color: #a0aec0;
-  }
-
+  
   .agb-day-number {
-    color: #e2e8f0;
+    font-size: 12px;
+    margin-bottom: 2px;
   }
 
-  .agb-details-header h2 {
-    color: #e2e8f0;
+  .agb-attendance-dots {
+    bottom: 2px;
+    gap: 2px;
   }
 
-  .agb-details-header p {
-    color: #a0aec0;
+  .agb-attendance-dot {
+    width: 4px;
+    height: 4px;
   }
 
-  .agb-stat-label {
-    color: #a0aec0;
+  .agb-calendar-navigation h3 {
+    font-size: 18px;
   }
 
-  .agb-stat-value {
-    color: #4299e1;
+  .agb-calendar-navigation button {
+    padding: 10px;
   }
 
-  .agb-detail-date div h3 {
-    color: #e2e8f0;
+  .agb-calendar-legend {
+    padding: 12px;
+    gap: 8px;
   }
 
-  .agb-detail-date div p {
-    color: #a0aec0;
+  .agb-legend-item {
+    font-size: 11px;
+    gap: 6px;
   }
 
-  .agb-time-item i {
-    color: #a0aec0;
-  }
-
-  .agb-time-label {
-    color: #e2e8f0;
-  }
-
-  .agb-time-value {
-    color: #e2e8f0;
-  }
-
-  .agb-absent-text {
-    color: #fc8181; /* Lighter red for dark mode */
-  }
-
-  .agb-status-present {
-    color: #68d391; /* Lighter green for dark mode */
-  }
-
-  .agb-status-absent {
-    color: #fc8181; /* Lighter red for dark mode */
-  }
-
-  .agb-late-indicator {
-    color: #f6ad55; /* Lighter orange for dark mode */
-  }
-
-  .agb-no-data {
-    color: #a0aec0;
-  }
-
-  .agb-no-data h3 {
-    color: #e2e8f0;
-  }
-
-  .agb-no-data-icon {
-    color: #718096;
-  }
-
-  .agb-loading,
-  .agb-error {
-    background: linear-gradient(135deg, #4a148c, #2d0b40); /* Darker purple/red for errors */
-    border-color: #6a1b9a;
-    border-left-color: #9c27b0;
-  }
-
-  .agb-loading h3,
-  .agb-error h3 {
-    color: #e1bee7;
-  }
-
-  .agb-loading p,
-  .agb-error p {
-    color: #ce93d8;
+  .agb-legend-dot {
+    width: 10px;
+    height: 10px;
   }
 
   .agb-footer {
-    color: #a0aec0;
+    font-size: 11px;
+    padding: 16px;
+  }
+
+  .agb-detail-card {
+    padding: 16px;
+  }
+
+  .agb-detail-date {
+    text-align: center;
+    min-width: auto;
+  }
+
+  .agb-detail-date h3 {
+    font-size: 14px;
+  }
+
+  .agb-time-item {
+    font-size: 12px;
+  }
+
+  .agb-time-label {
+    min-width: 60px;
+  }
+
+  .agb-day-details-content {
+    padding: 24px 20px;
+    margin: 16px;
+    border-radius: 16px;
+  }
+
+  .agb-day-details-header h3 {
+    font-size: 18px;
+  }
+
+  .agb-detail-row {
+    padding: 10px 0;
+  }
+
+  .agb-detail-label {
+    font-size: 13px;
+  }
+
+  .agb-detail-value {
+    font-size: 13px;
   }
 }
 
-/* Animation Classes - Consistent */
+/* Extra small devices */
+@media (max-width: 360px) {
+  .agb-main-content-wrapper {
+    padding: 8px;
+  }
+
+  .agb-top-nav {
+    padding: 12px 16px;
+  }
+
+  .agb-nav-title {
+    font-size: 18px;
+  }
+
+  .agb-form-card {
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+
+  /* Very tight stats grid for tiny screens */
+  .agb-stats-grid {
+    gap: 6px;
+  }
+
+  .agb-stat-card {
+    padding: 10px;
+    min-height: 110px;
+    gap: 6px;
+  }
+
+  .agb-stat-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+
+  .agb-stat-number {
+    font-size: 20px;
+  }
+
+  .agb-stat-content h3 {
+    font-size: 13px;
+  }
+
+  .agb-stat-details {
+    font-size: 9px;
+  }
+
+  .agb-stat-action .agb-btn-link {
+    font-size: 10px;
+    padding: 4px 8px;
+  }
+
+  /* Ultra-compact calendar for tiny screens */
+  .agb-calendar-day {
+    min-height: 42px;
+  }
+
+  .agb-day-number {
+    font-size: 11px;
+  }
+
+  .agb-calendar-header-cell {
+    font-size: 10px;
+    padding: 6px 1px;
+  }
+
+  .agb-calendar-navigation h3 {
+    font-size: 16px;
+  }
+
+  .agb-calendar-legend {
+    padding: 10px;
+  }
+
+  .agb-legend-item {
+    font-size: 10px;
+  }
+
+  .agb-legend-dot {
+    width: 8px;
+    height: 8px;
+  }
+
+  .agb-day-details-content {
+    padding: 20px 16px;
+    margin: 12px;
+  }
+}
+
+/* Landscape orientation adjustments for mobile */
+@media (max-height: 600px) and (orientation: landscape) and (max-width: 768px) {
+  .agb-main-content-wrapper {
+    padding: 8px;
+  }
+
+  .agb-top-nav {
+    padding: 12px 20px;
+  }
+
+  .agb-nav-title {
+    font-size: 18px;
+  }
+
+  .agb-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .agb-stat-card {
+    padding: 12px;
+    min-height: 100px;
+  }
+
+  .agb-calendar-day {
+    min-height: 40px;
+  }
+}
+
+/* Notification System */
+.agb-notification-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.agb-notification {
+  background: #1976d2;
+  color: white;
+  padding: 16px 20px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(25, 118, 210, 0.3);
+  margin-bottom: 10px;
+  transform: translateX(400px);
+  opacity: 0;
+  transition: all 0.3s ease;
+  pointer-events: auto;
+  max-width: 350px;
+  word-wrap: break-word;
+}
+
+.agb-notification.show {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.agb-notification.success {
+  background: #388e3c;
+  box-shadow: 0 10px 30px rgba(56, 142, 60, 0.3);
+}
+
+.agb-notification.warning {
+  background: #ff9800;
+  box-shadow: 0 10px 30px rgba(255, 152, 0, 0.3);
+}
+
+.agb-notification.error {
+  background: #d32f2f;
+  box-shadow: 0 10px 30px rgba(211, 47, 47, 0.3);
+}
+
+/* Animation keyframes */
 @keyframes fadeInDown {
   from {
     opacity: 0;
-    transform: translateY(-30px);
+    transform: translateY(-20px);
   }
   to {
     opacity: 1;
@@ -1462,7 +1452,7 @@ body {
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
@@ -1479,15 +1469,20 @@ body {
   }
 }
 
-@keyframes slideInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+@keyframes wave {
+  0% { transform: rotate(0deg); }
+  15% { transform: rotate(14deg); }
+  30% { transform: rotate(-8deg); }
+  40% { transform: rotate(14deg); }
+  50% { transform: rotate(-4deg); }
+  60% { transform: rotate(10deg); }
+  70% { transform: rotate(0deg); }
+  100% { transform: rotate(0deg); }
+}
+.animate-wave {
+  display: inline-block;
+  animation: wave 2s infinite;
+  transform-origin: 70% 70%;
 }
 
 @keyframes slideInRight {
@@ -1501,52 +1496,68 @@ body {
   }
 }
 
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
-  }
-}
-
-/* Apply animations to relevant elements */
-.agb-stat-card,
-.agb-detail-card,
-.agb-form-card {
-  animation: fadeInUp 0.5s ease-out;
-}
-
-.agb-calendar-day {
-  animation: slideInRight 0.3s ease-out;
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.animate-spin {
-  animation: spin 1s linear infinite;
-}
-
-.animate-pulse {
-  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
-/* Smooth transitions for all interactive elements */
-* {
-  transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-}
-
 /* Focus states for accessibility */
 .agb-btn:focus,
 .agb-stat-card:focus,
 .agb-calendar-day:focus {
-  outline: 2px solid #1976d2; /* Consistent primary color for focus */
+  outline: 2px solid #3b82f6;
   outline-offset: 2px;
+}
+
+/* Touch-friendly sizing */
+@media (hover: none) {
+  .agb-btn,
+  .agb-close-modal {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  .agb-calendar-day {
+    min-height: 44px;
+  }
+}
+
+/* Print styles */
+@media print {
+  .agb-nav-actions,
+  .agb-stat-action,
+  .agb-footer {
+    display: none;
+  }
+  
+  .agb-app-container {
+    background: white;
+    padding: 0;
+  }
+  
+  .agb-main-content-wrapper,
+  .agb-form-card {
+    box-shadow: none;
+    border: 1px solid #e2e8f0;
+  }
+}
+
+/* Error page styles */
+.agb-error {
+  text-align: center;
+  padding: 60px 32px;
+  color: #6b7280;
+}
+
+.agb-error h3 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #374151;
+  margin: 16px 0 8px;
+}
+
+.agb-error p {
+  font-size: 16px;
+  color: #6b7280;
+  margin-bottom: 24px;
+}
+
+.agb-error i {
+  color: #f59e0b;
+  margin-bottom: 16px;
 }

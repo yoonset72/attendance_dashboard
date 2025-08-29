@@ -36,7 +36,7 @@ class EmployeePortal(http.Controller):
                     'password': password
                 })
                 request.session['employee_number'] = employee.id
-                return request.redirect('/employee/profile')
+                return request.redirect('/attendance/dashboard')
 
             if forgot:
                 # Only show reset template if user explicitly clicked "Forgot Password"
