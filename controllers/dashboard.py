@@ -19,7 +19,7 @@ class AttendanceDashboardController(http.Controller):
     def _get_fiscal_period(self):
         """Return start_date and end_date based on fiscal year starting July 26"""
         today = self._now_myanmar()
-        start = today.replace(month=9, day=1, hour=0, minute=0, second=0, microsecond=0)
+        start = today.replace(month=8, day=29, hour=0, minute=0, second=0, microsecond=0)
 
         if today < start:
             start_date = start.replace(year=today.year - 1)
