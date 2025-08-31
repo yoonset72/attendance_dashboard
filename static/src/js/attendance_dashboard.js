@@ -163,48 +163,57 @@ function calculateWorkingHours(checkin, checkout) {
     let startY = 0;
     let currentY = 0;
     let isPulling = false;
-    const threshold = 100; // Pixels to trigger refresh
+    const threshold = 60; // pixels to trigger refresh
 
-    // Create refresh icon element if not exists
+    // Create refresh icon
     let refreshIcon = document.getElementById('pull-refresh-icon');
     if (!refreshIcon) {
         refreshIcon = document.createElement('div');
         refreshIcon.id = 'pull-refresh-icon';
-        refreshIcon.innerHTML = '⭮'; // Unicode refresh icon, can use SVG or image
-        refreshIcon.style.position = 'fixed';
-        refreshIcon.style.top = '10px';
-        refreshIcon.style.left = '50%';
-        refreshIcon.style.transform = 'translateX(-50%)';
-        refreshIcon.style.fontSize = '24px';
-        refreshIcon.style.zIndex = '9999';
-        refreshIcon.style.display = 'none';
-        refreshIcon.style.animation = 'spin 1s linear infinite';
+        refreshIcon.innerHTML = '<i class="fa fa-spinner fa-spin"></i>';
         document.body.appendChild(refreshIcon);
     }
 
     function touchStartHandler(e) {
-        if (window.scrollY === 0) { // Only trigger if at top
+        if (window.scrollY === 0) { // only at top
             startY = e.touches[0].clientY;
             isPulling = true;
+            refreshIcon.style.top = '20px';
+            refreshIcon.style.opacity = '0';
         }
     }
 
     function touchMoveHandler(e) {
         if (!isPulling) return;
         currentY = e.touches[0].clientY;
-        if (currentY - startY > threshold) {
-            isPulling = false; // Prevent multiple triggers
+        let deltaY = currentY - startY;
 
-            // Show refresh icon
+        if (deltaY > 0) { // pulling down
             refreshIcon.style.display = 'block';
+            refreshIcon.style.top = `${20 + deltaY / 2}px`;
+            refreshIcon.style.opacity = Math.min(deltaY / threshold, 1);
 
-            setTimeout(() => {
-                window.location.reload();
-            }, 1000);
+            if (deltaY > threshold) {
+                refreshIcon.classList.add('ready'); // optional styling
+            } else {
+                refreshIcon.classList.remove('ready');
+            }
         }
     }
 
     function touchEndHandler() {
+        if (!isPulling) return;
+        let deltaY = currentY - startY;
+        if (deltaY > threshold) {
+            // Trigger reload
+            refreshIcon.innerHTML = '<i class="fa fa-spinner fa-spin"></i>';
+            setTimeout(() => {
+                window.location.reload();
+            }, 200);
+        } else {
+            // Hide icon
+            refreshIcon.style.display = 'none';
+        }
         isPulling = false;
     }
 
@@ -212,6 +221,7 @@ function calculateWorkingHours(checkin, checkout) {
     document.addEventListener('touchmove', touchMoveHandler, {passive: true});
     document.addEventListener('touchend', touchEndHandler);
 })();
+
 
 
 // Export functions for use in other scripts

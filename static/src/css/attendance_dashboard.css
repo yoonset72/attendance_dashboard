@@ -124,14 +124,23 @@ body {
   cursor: not-allowed;
 }
 
-.agb-btn-refresh.refreshing .fa-refresh {
-  animation: spin 1s linear infinite;
+#pull-refresh-icon {
+    font-size: 32px;
+    color: #ff9800;
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    display: none;
+    transition: opacity 0.3s ease, top 0.3s ease;
 }
 
 @keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+    0% { transform: translateX(-50%) rotate(0deg); }
+    100% { transform: translateX(-50%) rotate(360deg); }
 }
+
 
 .agb-btn-primary {
   background: linear-gradient(135deg, #3b82f6, #1d4ed8);

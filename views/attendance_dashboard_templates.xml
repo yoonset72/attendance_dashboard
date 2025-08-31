@@ -5,9 +5,9 @@
         <head>
             <title>AGB Communication - Attendance Dashboard</title>
             <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>    
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>    
             <link rel="stylesheet" type="text/css" href="/attendance_dashboard/static/src/css/attendance_dashboard.css"/>
-            <script type="text/javascript" src="/attendance_dashboard/static/src/js/attendance_dashboard.js"/>
+            <script type="text/javascript" src="/attendance_dashboard/static/src/js/attendance_dashboard.js" defer="defer"/>
         </head>
         <body>
             <div class="agb-app-container">
@@ -55,8 +55,7 @@
                             <!-- Leave Card -->
                             <div class="agb-form-card agb-stat-card agb-stat-leave">
                                 <div class="agb-stat-icon">
-                                    <!-- <i class="fa fa-plane"></i> -->
-                                    <img src="/attendance_dashboard/static/src/img/leave.png" alt="Leave Application" class="agb-leave-icon"/>
+                                    <i class="fa-solid fa-file-signature"></i>
                                 </div>
                                 <div class="agb-stat-content">
                                     <h3>Leave</h3>
