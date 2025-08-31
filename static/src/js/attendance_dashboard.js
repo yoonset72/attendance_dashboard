@@ -164,32 +164,55 @@ function calculateWorkingHours(checkin, checkout) {
     let currentY = 0;
     let isPulling = false;
     const threshold = 100; // Pixels to trigger refresh
-    const body = document.body;
+
+    // Create refresh icon element if not exists
+    let refreshIcon = document.getElementById('pull-refresh-icon');
+    if (!refreshIcon) {
+        refreshIcon = document.createElement('div');
+        refreshIcon.id = 'pull-refresh-icon';
+        refreshIcon.innerHTML = '⭮'; // Unicode refresh icon, can use SVG or image
+        refreshIcon.style.position = 'fixed';
+        refreshIcon.style.top = '10px';
+        refreshIcon.style.left = '50%';
+        refreshIcon.style.transform = 'translateX(-50%)';
+        refreshIcon.style.fontSize = '24px';
+        refreshIcon.style.zIndex = '9999';
+        refreshIcon.style.display = 'none';
+        refreshIcon.style.animation = 'spin 1s linear infinite';
+        document.body.appendChild(refreshIcon);
+    }
+
     function touchStartHandler(e) {
-        if (window.scrollY === 0) { // Only trigger if at top of page
+        if (window.scrollY === 0) { // Only trigger if at top
             startY = e.touches[0].clientY;
             isPulling = true;
         }
     }
+
     function touchMoveHandler(e) {
         if (!isPulling) return;
         currentY = e.touches[0].clientY;
         if (currentY - startY > threshold) {
-            // User pulled down enough to trigger refresh
             isPulling = false; // Prevent multiple triggers
-            showNotification('Refreshing data...', 'info');
+
+            // Show refresh icon
+            refreshIcon.style.display = 'block';
+
             setTimeout(() => {
                 window.location.reload();
             }, 1000);
         }
     }
+
     function touchEndHandler() {
         isPulling = false;
     }
+
     document.addEventListener('touchstart', touchStartHandler, {passive: true});
     document.addEventListener('touchmove', touchMoveHandler, {passive: true});
     document.addEventListener('touchend', touchEndHandler);
 })();
+
 
 // Export functions for use in other scripts
 window.showDayDetails = showDayDetails;

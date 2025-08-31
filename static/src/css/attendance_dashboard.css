@@ -228,7 +228,7 @@ body {
 }
 
 .agb-stat-leave {
-  --accent-gradient: linear-gradient(90deg, #8b5cf6, #7c3aed);
+--accent-gradient: linear-gradient(90deg, #ff9800, #fb8c00);
 }
 
 .agb-stat-icon {
@@ -810,6 +810,21 @@ body {
   border-bottom: none;
 }
 
+.agb-leave-icon {
+    width: 40px;           /* size like other icons */
+    height: 40px;
+    object-fit: contain;    /* keep aspect ratio */
+    display: block;
+    margin: 0 auto;
+    cursor: pointer;        /* makes it clickable */
+    transition: transform 0.2s ease;
+}
+
+.agb-leave-icon:hover {
+    transform: scale(1.2); /* small hover animation */
+}
+
+
 .agb-detail-label {
   font-weight: 600;
   color: #374151;
@@ -817,7 +832,20 @@ body {
   align-items: center;
   gap: 8px;
   font-size: 14px;
+}.agb-leave-icon {
+    width: 40px;           /* size like other icons */
+    height: 40px;
+    object-fit: contain;    /* keep aspect ratio */
+    display: block;
+    margin: 0 auto;
+    cursor: pointer;        /* makes it clickable */
+    transition: transform 0.2s ease;
 }
+
+.agb-leave-icon:hover {
+    transform: scale(1.2); /* small hover animation */
+}
+
 
 .agb-detail-value {
   color: #1f2937;
@@ -1448,6 +1476,12 @@ body {
     transform: translateY(0);
   }
 }
+
+@keyframes spin {
+    from { transform: translateX(-50%) rotate(0deg); }
+    to { transform: translateX(-50%) rotate(360deg); }
+}
+
 
 @keyframes fadeInUp {
   from {
