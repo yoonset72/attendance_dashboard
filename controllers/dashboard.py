@@ -31,9 +31,22 @@ class AttendanceDashboardController(http.Controller):
     # --- Dashboard Route ---
     @http.route('/attendance/dashboard', type='http', auth='public', website=True)
     def attendance_dashboard(self, **kwargs):
-        employee = self._get_employee()
-        if not employee:
+        # --- Check session first ---
+        employee_id = request.session.get('employee_number')
+
+        # --- Check token from header (for APK) ---
+        if not employee_id and 'X-Employee-Token' in request.httprequest.headers:
+            token = request.httprequest.headers.get('X-Employee-Token')
+            login_record = request.env['employee.login'].sudo().search([('login_token', '=', token)], limit=1)
+            if login_record:
+                employee_id = login_record.employee_number.id
+                request.session['employee_number'] = employee_id  # store in session for future web access
+
+        # --- If no valid login, redirect to login page ---
+        if not employee_id:
             return request.redirect('/employee/register')
+
+        employee = request.env['hr.employee'].sudo().browse(employee_id)
 
         start_date, end_date = self._get_fiscal_period()
 
@@ -56,6 +69,7 @@ class AttendanceDashboardController(http.Controller):
                 'email': 'hr@agbcommunication.com'
             }
         })
+
 
     # --- Calendar Route ---
     @http.route('/attendance/calendar', type='http', auth='public', website=True)
