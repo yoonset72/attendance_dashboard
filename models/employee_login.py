@@ -2,7 +2,6 @@ from odoo import models, fields, api
 from passlib.context import CryptContext
 import uuid
 
-# Create a reusable context with the same algorithm as Odoo uses
 pwd_context = CryptContext(schemes=["pbkdf2_sha512"], deprecated="auto")
 
 class EmployeeLogin(models.Model):

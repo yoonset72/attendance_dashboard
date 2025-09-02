@@ -4,6 +4,7 @@ from datetime import datetime, timedelta, date
 import pytz
 import calendar
 import logging
+from dateutil.relativedelta import relativedelta
 
 _logger = logging.getLogger(__name__)
 
@@ -145,23 +146,40 @@ class AttendanceDashboardController(http.Controller):
         return employee
 
     def _calculate_stats(self, employee, attendances, start_date, end_date):
-        # Generate calendar data for the period
-        calendar_data = self._get_calendar_data(employee, start_date.year, start_date.month)
+        """
+        Calculate attendance statistics for the given employee and date range.
+        Handles multi-month periods and filters days strictly within the range.
+        """
+        calendar_data = {}
+
+        # Iterate over all months in the range
+        current = start_date.replace(day=1)
+        while current <= end_date:
+            month_data = self._get_calendar_data(employee, current.year, current.month)
+            # Keep only days within the range
+            for day, data in month_data.items():
+                if start_date.date() <= data['date'] <= end_date.date():
+                    calendar_data[data['date']] = data
+            current += relativedelta(months=1)
 
         # Total present based on attendance_fraction
         present_count = sum(day['attendance_fraction'] for day in calendar_data.values())
 
         # Calculate absent count using absent_fraction from _get_absent_days
         absent_days = self._get_absent_days(employee)
-        absent_count = sum(day.get('absent_fraction', 0) for day in absent_days)
+        absent_count = sum(
+            day.get('absent_fraction', 0)
+            for day in absent_days
+            if start_date.date() <= day.get('date', date.min) <= end_date.date()
+        )
 
         # Late count
         late_count = sum(1 for a in attendances if getattr(a, 'display_late_minutes', 0) > 0)
 
-        # Total days in period
+        # Total days in the period
         total_days = (end_date.date() - start_date.date()).days + 1
 
-        # Round present and absent counts to 1 decimal for clean display
+        # Round for clean display
         present_count = round(present_count, 1)
         absent_count = round(absent_count, 1)
 
@@ -233,7 +251,7 @@ class AttendanceDashboardController(http.Controller):
                 except:
                     pass
 
-            shift_name = employee.resource_calendar_id.name if employee.resource_calendar_id else 'Standard Shift (9:00 AM - 6:00 PM)'
+            shift_name = employee.resource_calendar_id.name if employee.resource_calendar_ids else 'Standard Shift (9:00 AM - 6:00 PM)'
 
             calendar_data[day] = {
                 'date': current_date,

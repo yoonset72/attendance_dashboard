@@ -2,6 +2,7 @@ from odoo import http
 from odoo.http import request
 import logging
 import uuid
+import json
 
 _logger = logging.getLogger(__name__)
 
@@ -58,11 +59,14 @@ class EmployeePortal(http.Controller):
                 request.session['employee_number'] = employee.id
                 token = str(uuid.uuid4())
                 login_rec.sudo().write({'login_token': token})
-                response = request.make_response(None, headers={'X-Employee-Token': token})
-                response.status_code = 200
-                if 'Mobile' not in request.httprequest.headers.get('User-Agent', ''):
+                if 'Mobile' in request.httprequest.headers.get('User-Agent', ''):
+                    return request.make_response(
+                        json.dumps({'status': 'success', 'token': token}),
+                        headers={'Content-Type': 'application/json'}
+                    )
+                else:
                     return request.redirect('/attendance/dashboard')
-                return response
+
             else:
                 return request.render('attendance_dashboard.register_template', {
                     'error': 'Wrong password.',
