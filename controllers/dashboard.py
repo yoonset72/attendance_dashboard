@@ -197,6 +197,13 @@ class AttendanceDashboardController(http.Controller):
         _, num_days = calendar.monthrange(year, month)
         today_date = self._now_myanmar().date()
 
+        # Prepare shift names safely
+        if employee.resource_calendar_ids:
+            # Combine multiple calendars into a comma-separated string
+            shift_name = ', '.join(employee.resource_calendar_ids.mapped('name'))
+        else:
+            shift_name = 'Standard Shift (9:00 AM - 6:00 PM)'
+
         for day in range(1, num_days + 1):
             current_date = date(year, month, day)
             weekday = current_date.weekday()
@@ -251,8 +258,7 @@ class AttendanceDashboardController(http.Controller):
                 except:
                     pass
 
-            shift_name = employee.resource_calendar_id.name if employee.resource_calendar_ids else 'Standard Shift (9:00 AM - 6:00 PM)'
-
+            # Populate calendar data
             calendar_data[day] = {
                 'date': current_date,
                 'day': day,
@@ -273,7 +279,6 @@ class AttendanceDashboardController(http.Controller):
             }
 
         return calendar_data
-
 
 
     def _get_prev_month(self, year, month):

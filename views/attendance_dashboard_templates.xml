@@ -92,7 +92,8 @@
                                     </div>
                                     <div class="agb-info-item">
                                         <i class="fa fa-clock-o"></i> 
-                                        <span>Working Schedule: <strong><t t-esc="employee.resource_calendar_ids.name or 'Standard Schedule (9:00 AM - 6:00 PM)'"/></strong></span>
+                                        <span>Working Schedule: <strong><t t-esc="', '.join(employee.resource_calendar_ids.mapped('name')) or 'Standard Schedule (9:00 AM - 6:00 PM)'"/>
+</strong></span>
                                     </div>
                                 </div>
                             </div>
